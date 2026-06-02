@@ -27,4 +27,3 @@ def user_datas():
   
   return all_data_dictionary
 
-user_datas()

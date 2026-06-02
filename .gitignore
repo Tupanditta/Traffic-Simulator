@@ -1,0 +1,5 @@
+# Archivos compilados de Python, que quiero ignorar
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

@@ -10,14 +10,35 @@ Si hubiera algún error, el programa se detendrá y devolvera un mensaje de erro
 
 import json
 import sys
+import os
 
-def read_statisticalDatas(file_path):
+def read_statisticalDatas():
   print("Iniciando la lectura del archivo json con los Datos Estadísticos: ")
+
+  # Construimos la ruta dinámica al JSON (busca en la misma carpeta que este script)
+  actual_directory = os.path.dirname(__file__)
+  file_path = os.path.join(actual_directory, "statisticalData.json")
 
   try:
     with open(file_path, "r") as file:
       statisticalDatas = json.load(file)
       print("Se han cargado los datos exitosamente")
+
+      if "Transition_Matrix" in statisticalDatas:
+        # Creamos un nuevo diccionario con las claves como int
+        raw_matrix = statisticalDatas["Transition_Matrix"]
+        
+        # Convertimos solo las claves del nivel 1 (1, 2, 3, 4)
+        # Nota: Esto no afecta a "Posible_States"
+        clean_matrix = {}
+        for k, v in raw_matrix.items():
+            if k.isdigit(): # Comprobamos si es un número antes de convertir
+                clean_matrix[int(k)] = v
+            else:
+                clean_matrix[k] = v # Mantenemos "Posible_States" tal cual
+        
+        statisticalDatas["Transition_Matrix"] = clean_matrix
+        
       return statisticalDatas
     
   except FileNotFoundError as errorDetail: 
@@ -29,5 +50,3 @@ def read_statisticalDatas(file_path):
     print(f"Detalle técnico del error {errorDetail}")
     sys.exit(1)
 
-statiscalDatas = read_statisticalDatas(r"C:\Users\ander\Desktop\Kirby\Python\py\mis_funciones\TrafficAccidentSimulator\code\context\statisticalData\statisticaData.json")
-print(statiscalDatas)
