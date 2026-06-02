@@ -38,25 +38,26 @@ context_dict = {
     "_comment_doc": "Archivo de configuracion principal del Simulador de Accidentes.",
     "_comment_matrix": "Probabilidades de transicion de Markov. Claves: Sun, Rain, Snow, Cloudy",
     "Transition_Matrix": {
-        "Winter": {
+        "Posible_States": ["Sun", "Rain", "Snow", "Cloudy"],
+        1: {
             "Sun": {"Sun": 0.45, "Rain": 0.30, "Snow": 0.05, "Cloudy": 0.20},
             "Rain": {"Sun": 0.25, "Rain": 0.55, "Snow": 0.15, "Cloudy": 0.05},
             "Snow": {"Sun": 0.15, "Rain": 0.40, "Snow": 0.35, "Cloudy": 0.10},
             "Cloudy": {"Sun": 0.25, "Rain": 0.15, "Snow": 0.05, "Cloudy": 0.55}
         },
-        "Spring": {
+        2: {
             "Sun": {"Sun": 0.65, "Rain": 0.30, "Snow": 0.01, "Cloudy": 0.04},
             "Rain": {"Sun": 0.45, "Rain": 0.50, "Snow": 0.03, "Cloudy": 0.02},
             "Snow": {"Sun": 0.40, "Rain": 0.50, "Snow": 0.10, "Cloudy": 0.00},
             "Cloudy": {"Sun": 0.70, "Rain": 0.20, "Snow": 0.00, "Cloudy": 0.10}
         },
-        "Summer": {
+        3: {
             "Sun": {"Sun": 0.88, "Rain": 0.12, "Snow": 0.00, "Cloudy": 0.00},
             "Rain": {"Sun": 0.75, "Rain": 0.25, "Snow": 0.00, "Cloudy": 0.00},
             "Snow": {"Sun": 1.00, "Rain": 0.00, "Snow": 0.00, "Cloudy": 0.00},
             "Cloudy": {"Sun": 1.00, "Rain": 0.00, "Snow": 0.00, "Cloudy": 0.00}
         },
-        "Autumn": {
+        4: {
             "Sun": {"Sun": 0.60, "Rain": 0.25, "Snow": 0.00, "Cloudy": 0.15},
             "Rain": {"Sun": 0.35, "Rain": 0.50, "Snow": 0.02, "Cloudy": 0.13},
             "Snow": {"Sun": 0.25, "Rain": 0.60, "Snow": 0.10, "Cloudy": 0.05},
@@ -87,30 +88,41 @@ context_dict = {
     }
 }
 
-import initialState
+
+from engine.InitialState.initialState import variables, create_InitialState
+from engine.environment.calendary import create_date
+from engine.environment.weather import update_weather
 
 def run(context_dict):
-    initialState_Dict, dictList = initialState.create_InitialState(context_dict)
+    #Crear el diccionario del estado inicial
+    initialState_Dict, dictList = create_InitialState(context_dict)
 
+    #Pasar los datos necesarios del initialState_Dict a variables
+    yesterday_date, yesterday_date_dict, final_date = variables(initialState_Dict)
 
-###### 1. CALL ENVIRONMENT
+    while yesterday_date < final_date:
 
-### 1.1 CALL calendary.py
-#Pasar la fecha actual al motor calendary.py, y este devuelve los atributos de esa fecha exacta
+        ###### 1. CALL ENVIRONMENT
 
+        ### 1.1 CALL calendary.py
+        #Pasar la fecha actual al motor calendary.py, y este devuelve los atributos de esa fecha exacta
+        actual_date_dict = create_date(yesterday_date_dict)
 
-### 1.2 CALL clima.py
-#Pasar el clima de ayer al motor clima.py y este devuelve el clima de hoy
+        ### 1.2 CALL clima.py
+        #Pasar el clima de ayer al motor clima.py y este devuelve el clima de hoy
+        actual_date_dict = update_weather(context_dict, actual_date_dict, yesterday_date_dict)
 
-###### 2. CALL CALCULATOR
-#Calcula los accidentes ocurridos ese día en función de todos los datos ya obtenidos
+        ###### 2. CALL CALCULATOR
+        #Calcula los accidentes ocurridos ese día en función de todos los datos ya obtenidos
 
-###### 3. CALL UPDATE DATAS
-#Guarda todos los datos obtenidos y creados y actualiza el state
+        ###### 3. CALL UPDATE DATAS
+        #Guarda todos los datos obtenidos y creados y actualiza el state
 
-###### 4. CALL NEXT
-#Avanzamos un día para que el bucle no sea infinito y guardamos el clima de hoy en la variable
-#del clima de ayer
+        ###### 4. CALL NEXT
+        #Avanzamos un día para que el bucle no sea infinito y guardamos el clima de hoy en la variable
+        #del clima de ayer
+        yesterday_date_dict = actual_date_dict
+        yesterday_date = actual_date_dict["Date"]["Date"]
 
     return dictList
 
