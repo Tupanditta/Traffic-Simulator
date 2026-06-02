@@ -170,5 +170,32 @@
     "Alcohol": 3.0,
     "Drugs": 7.0,
     "Sober": 1.0
+  },
+  "_comment_weather_traffic": "Multiplicador que reduce o mantiene la poblacion en la calle segun el clima.",
+  "Weather_Traffic_Multipliers": {
+    "Children": {
+      "Sun": 1.00,
+      "Cloudy": 0.95,
+      "Rain": 0.60,
+      "Snow": 0.20
+    },
+    "Teenagers": {
+      "Sun": 1.00,
+      "Cloudy": 0.95,
+      "Rain": 0.75,
+      "Snow": 0.40
+    },
+    "Adults": {
+      "Sun": 1.00,
+      "Cloudy": 0.98,
+      "Rain": 0.90,
+      "Snow": 0.75
+    },
+    "Olders": {
+      "Sun": 1.00,
+      "Cloudy": 0.90,
+      "Rain": 0.40,
+      "Snow": 0.10
+    }
   }
 }
