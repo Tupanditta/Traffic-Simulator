@@ -101,7 +101,6 @@ def ask_demography():
   """
   demography = {
     "children" : 0, 
-    "teenagers": 0,
     "Teenagers": 0,
     "adults" : 0, 
     "older" : 0,
