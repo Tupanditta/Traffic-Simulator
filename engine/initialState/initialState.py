@@ -11,29 +11,29 @@ no tiene que entrar en el diccionario
 """
 import datetime
 
-def variables(initialState_Dict):
-  yesterday_date_dict = initialState_Dict
-  yesterday_date = yesterday_date_dict["Date"]["Date"]
-  final_date = initialState_Dict["Final Date"]
+def variables(initial_state_dict):
+  yesterday_date_dict = initial_state_dict
+  yesterday_date = yesterday_date_dict["date"]["date"]
+  final_date = initial_state_dict["final_date"]
 
   return yesterday_date, yesterday_date_dict, final_date
 
-def create_InitialState(context_dict):
-  dictList = [] #los diccionarios de cada día se guardarán en un lista
-  initialState_Dict = {
-    "Date": {
-      "Date": datetime.date(2017, 12, 10),
-      "Attribute": datetime.date(2017, 12, 10).weekday(),
-      "Season": 2
+def create_initial_state(context_dict):
+  dict_list = [] # los diccionarios de cada día se guardarán en una lista
+  initial_state_dict = {
+    "date": {
+      "date": datetime.date(2017, 12, 10),
+      "attribute": datetime.date(2017, 12, 10).weekday(),
+      "season": 2
     }, 
-    "Final Date": datetime.date(2018, 3, 19), #hay que cambiarlo, me lo he inventado
-    "Weather": "Rain",
-    "Traffic": {
-      "Total": None,
-      "Children": None,
-      "Teenagers": None,
-      "Adults": None,
-      "Olders": None
+    "final_date": datetime.date(2018, 3, 19), # hay que cambiarlo, me lo he inventado
+    "weather": "rain", 
+    "traffic": {
+      "total": None,
+      "children": None,
+      "teenagers": None,
+      "adults": None,
+      "olders": None
     }, 
   }
-  return initialState_Dict, dictList
+  return initial_state_dict, dict_list

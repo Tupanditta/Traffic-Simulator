@@ -3,16 +3,16 @@ Este archivo se encarga de leer todos los datos estadísticos almacenados en el 
 Se hace así pues si se deben modificar los datos, añadir o borrar, lo que se modifica es el 
 archivo json, no un archivo.py. De tal manera que el error ocurre fuera del flujo del proyecto
 Es una forma de aislar lo que es el código de lo que es texto
-Una vez ejecutado, si se lee el archivo.json correctamente, se devuelve un diccionaro con toda
+Una vez ejecutado, si se lee el archivo.json correctamente, se devuelve un diccionario con toda
 la información
-Si hubiera algún error, el programa se detendrá y devolvera un mensaje de error. 
+Si hubiera algún error, el programa se detendrá y devolverá un mensaje de error. 
 """
 
 import json
 import sys
 import os
 
-def read_statisticalDatas():
+def read_statistical_data():
   print("Iniciando la lectura del archivo json con los Datos Estadísticos: ")
 
   # Construimos la ruta dinámica al JSON (busca en la misma carpeta que este script)
@@ -21,32 +21,31 @@ def read_statisticalDatas():
 
   try:
     with open(file_path, "r") as file:
-      statisticalDatas = json.load(file)
+      statistical_data_dict = json.load(file)
       print("Se han cargado los datos exitosamente")
 
-      if "Transition_Matrix" in statisticalDatas:
+      if "transition_matrix" in statistical_data_dict:
         # Creamos un nuevo diccionario con las claves como int
-        raw_matrix = statisticalDatas["Transition_Matrix"]
+        raw_matrix = statistical_data_dict["transition_matrix"]
         
         # Convertimos solo las claves del nivel 1 (1, 2, 3, 4)
-        # Nota: Esto no afecta a "Posible_States"
+        # Nota: Esto no afecta a "posible_states"
         clean_matrix = {}
         for k, v in raw_matrix.items():
             if k.isdigit(): # Comprobamos si es un número antes de convertir
                 clean_matrix[int(k)] = v
             else:
-                clean_matrix[k] = v # Mantenemos "Posible_States" tal cual
+                clean_matrix[k] = v # Mantenemos "posible_states" tal cual
         
-        statisticalDatas["Transition_Matrix"] = clean_matrix
+        statistical_data_dict["transition_matrix"] = clean_matrix
         
-      return statisticalDatas
+      return statistical_data_dict
     
-  except FileNotFoundError as errorDetail: 
+  except FileNotFoundError as error_detail: 
     print(f"No se encontró el archivo {file_path}")
-    print(f"El error se ubica en {errorDetail}")
+    print(f"El error se ubica en {error_detail}")
     sys.exit(1)
-  except json.JSONDecodeError as errorDetail:
+  except json.JSONDecodeError as error_detail:
     print(f"El archivo {file_path} está corrupto o mal formateado")
-    print(f"Detalle técnico del error {errorDetail}")
+    print(f"Detalle técnico del error {error_detail}")
     sys.exit(1)
-

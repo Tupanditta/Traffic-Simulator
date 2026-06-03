@@ -12,18 +12,16 @@ se sabrá que funciones usa internamente la función user_datas()
 
 Si existieran cambios en alguna función, a menos que se añadiera un nuevo data, esta función no cambiaría en absoluto
 """
-from .reading import ask_demography, ask_temporality, ask_population, ask_riskFactors
+from .reading import ask_demography, ask_temporality, ask_population, ask_risk_factors
 
 def user_datas():
-  ####  CREATE DATA DICTIONARY
-  all_data_dictionary = {
-  }
+  #### CREATE DATA DICTIONARY
+  all_data_dictionary = {}
 
-  ####  ASK AND VALIDATE ALL DATAS
-  all_data_dictionary["temporality"] = ask_temporality() #devuelve un int
-  all_data_dictionary["population"] = ask_population() #devuelve un int
-  all_data_dictionary["riskFactors"] = ask_riskFactors() #devuelve un diccionario
-  all_data_dictionary["demography"] = ask_demography() #devuelve un diccionario
+  #### ASK AND VALIDATE ALL DATAS
+  all_data_dictionary["temporality"] = ask_temporality()
+  all_data_dictionary["population"] = ask_population()
+  all_data_dictionary["risk_factors"] = ask_risk_factors() 
+  all_data_dictionary["demography"] = ask_demography() 
   
   return all_data_dictionary
-

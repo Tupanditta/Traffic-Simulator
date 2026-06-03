@@ -12,7 +12,7 @@ context_dict = {
     # ==========================================
     "temporality": 2,  # 1: Verano, 2: Invierno, 3: Otoño, 4: Primavera
     "population": 50000,
-    "riskFactors": {
+    "risk_factors": {
         "alcohol": {
             "teenagers": 15.5,
             "adults": 60.0,
@@ -26,112 +26,110 @@ context_dict = {
     },
     "demography": {
         "children": 15.0,
-        "Teenagers": 10.0,
+        "teenagers": 10.0,
         "adults": 55.0,
-        "older": 20.0
+        "olders": 20.0
     },
 
     # ==========================================
-    # DATOS ESTADÍSTICOS (read_statisticalDatas)
+    # DATOS ESTADÍSTICOS (read_statistical_data)
     # ==========================================
     "_comment_doc": "Archivo de configuracion principal del Simulador de Accidentes.",
-    "_comment_matrix": "Probabilidades de transicion de Markov. Claves: Sun, Rain, Snow, Cloudy",
-    "Transition_Matrix": {
-        "Posible_States": ["Sun", "Rain", "Snow", "Cloudy"],
+    "_comment_matrix": "Probabilidades de transicion de Markov. Claves: sun, rain, snow, cloudy",
+    "transition_matrix": {
+        "posible_states": ["sun", "rain", "snow", "cloudy"],
         1: {
-            "Sun": {"Sun": 0.45, "Rain": 0.30, "Snow": 0.05, "Cloudy": 0.20},
-            "Rain": {"Sun": 0.25, "Rain": 0.55, "Snow": 0.15, "Cloudy": 0.05},
-            "Snow": {"Sun": 0.15, "Rain": 0.40, "Snow": 0.35, "Cloudy": 0.10},
-            "Cloudy": {"Sun": 0.25, "Rain": 0.15, "Snow": 0.05, "Cloudy": 0.55}
+            "sun": {"sun": 0.45, "rain": 0.30, "snow": 0.05, "cloudy": 0.20},
+            "rain": {"sun": 0.25, "rain": 0.55, "snow": 0.15, "cloudy": 0.05},
+            "snow": {"sun": 0.15, "rain": 0.40, "snow": 0.35, "cloudy": 0.10},
+            "cloudy": {"sun": 0.25, "rain": 0.15, "snow": 0.05, "cloudy": 0.55}
         },
         2: {
-            "Sun": {"Sun": 0.65, "Rain": 0.30, "Snow": 0.01, "Cloudy": 0.04},
-            "Rain": {"Sun": 0.45, "Rain": 0.50, "Snow": 0.03, "Cloudy": 0.02},
-            "Snow": {"Sun": 0.40, "Rain": 0.50, "Snow": 0.10, "Cloudy": 0.00},
-            "Cloudy": {"Sun": 0.70, "Rain": 0.20, "Snow": 0.00, "Cloudy": 0.10}
+            "sun": {"sun": 0.65, "rain": 0.30, "snow": 0.01, "cloudy": 0.04},
+            "rain": {"sun": 0.45, "rain": 0.50, "snow": 0.03, "cloudy": 0.02},
+            "snow": {"sun": 0.40, "rain": 0.50, "snow": 0.10, "cloudy": 0.00},
+            "cloudy": {"sun": 0.70, "rain": 0.20, "snow": 0.00, "cloudy": 0.10}
         },
         3: {
-            "Sun": {"Sun": 0.88, "Rain": 0.12, "Snow": 0.00, "Cloudy": 0.00},
-            "Rain": {"Sun": 0.75, "Rain": 0.25, "Snow": 0.00, "Cloudy": 0.00},
-            "Snow": {"Sun": 1.00, "Rain": 0.00, "Snow": 0.00, "Cloudy": 0.00},
-            "Cloudy": {"Sun": 1.00, "Rain": 0.00, "Snow": 0.00, "Cloudy": 0.00}
+            "sun": {"sun": 0.88, "rain": 0.12, "snow": 0.00, "cloudy": 0.00},
+            "rain": {"sun": 0.75, "rain": 0.25, "snow": 0.00, "cloudy": 0.00},
+            "snow": {"sun": 1.00, "rain": 0.00, "snow": 0.00, "cloudy": 0.00},
+            "cloudy": {"sun": 1.00, "rain": 0.00, "snow": 0.00, "cloudy": 0.00}
         },
         4: {
-            "Sun": {"Sun": 0.60, "Rain": 0.25, "Snow": 0.00, "Cloudy": 0.15},
-            "Rain": {"Sun": 0.35, "Rain": 0.50, "Snow": 0.02, "Cloudy": 0.13},
-            "Snow": {"Sun": 0.25, "Rain": 0.60, "Snow": 0.10, "Cloudy": 0.05},
-            "Cloudy": {"Sun": 0.40, "Rain": 0.20, "Snow": 0.00, "Cloudy": 0.40}
+            "sun": {"sun": 0.60, "rain": 0.25, "snow": 0.00, "cloudy": 0.15},
+            "rain": {"sun": 0.35, "rain": 0.50, "snow": 0.02, "cloudy": 0.13},
+            "snow": {"sun": 0.25, "rain": 0.60, "snow": 0.10, "cloudy": 0.05},
+            "cloudy": {"sun": 0.40, "rain": 0.20, "snow": 0.00, "cloudy": 0.40}
         }
     },
     "_comment_base_rate": "Probabilidad pura de accidente por persona expuesta en condiciones ideales.",
-    "Base_Accident_Rate": 0.00015,
+    "base_accident_rate": 0.00015,
     "_comment_exposure": "Porcentaje de la poblacion que sale a la calle segun el tipo de dia.",
-    "Traffic_Exposure_Percentages": {
-        "Children": {"Workday": 0.85, "Weekend": 0.60, "Holiday": 0.40},
-        "Teenagers": {"Workday": 0.90, "Weekend": 0.75, "Holiday": 0.50},
-        "Adults": {"Workday": 0.95, "Weekend": 0.65, "Holiday": 0.45},
-        "Olders": {"Workday": 0.50, "Weekend": 0.40, "Holiday": 0.35}
+    "traffic_exposure_percentages": {
+        "children": {"workday": 0.85, "weekend": 0.60, "holiday": 0.40},
+        "teenagers": {"workday": 0.90, "weekend": 0.75, "holiday": 0.50},
+        "adults": {"workday": 0.95, "weekend": 0.65, "holiday": 0.45},
+        "olders": {"workday": 0.50, "weekend": 0.40, "holiday": 0.35}
     },
     "_comment_env_multipliers": "Como altera el clima la tasa base de siniestralidad.",
-    "Environmental_Multipliers": {
-        "Winter": {"Sun": 1.000, "Rain": 1.070, "Snow": 1.620, "Cloudy": 1.190},
-        "Spring": {"Sun": 1.000, "Rain": 1.145, "Snow": 1.440, "Cloudy": 1.350},
-        "Summer": {"Sun": 1.000, "Rain": 1.685, "Snow": 1.310, "Cloudy": 2.100},
-        "Autumn": {"Sun": 1.000, "Rain": 1.240, "Snow": 1.855, "Cloudy": 1.520}
+    "environmental_multipliers": {
+        "winter": {"sun": 1.000, "rain": 1.070, "snow": 1.620, "cloudy": 1.190},
+        "spring": {"sun": 1.000, "rain": 1.145, "snow": 1.440, "cloudy": 1.350},
+        "summer": {"sun": 1.000, "rain": 1.685, "snow": 1.310, "cloudy": 2.100},
+        "autumn": {"sun": 1.000, "rain": 1.240, "snow": 1.855, "cloudy": 1.520}
     },
     "_comment_beh_multipliers": "Como altera el comportamiento (alcohol/drogas) el riesgo individual.",
-    "Behavioral_Multipliers": {
-        "Alcohol": 3.0,
-        "Drugs": 7.0,
-        "Sober": 1.0
+    "behavioral_multipliers": {
+        "alcohol": 3.0,
+        "drugs": 7.0,
+        "sober": 1.0
     },
     "_comment_weather_traffic": "Multiplicador que reduce o mantiene la poblacion en la calle segun el clima.",
-    "Weather_Traffic_Multipliers": {
-        "Children": {"Sun": 1.00, "Cloudy": 0.95, "Rain": 0.60, "Snow": 0.20},
-        "Teenagers": {"Sun": 1.00, "Cloudy": 0.95, "Rain": 0.75, "Snow": 0.40},
-        "Adults": {"Sun": 1.00, "Cloudy": 0.98, "Rain": 0.90, "Snow": 0.75},
-        "Olders": {"Sun": 1.00, "Cloudy": 0.90, "Rain": 0.40, "Snow": 0.10}
+    "weather_traffic_multipliers": {
+        "children": {"sun": 1.00, "cloudy": 0.95, "rain": 0.60, "snow": 0.20},
+        "teenagers": {"sun": 1.00, "cloudy": 0.95, "rain": 0.75, "snow": 0.40},
+        "adults": {"sun": 1.00, "cloudy": 0.98, "rain": 0.90, "snow": 0.75},
+        "olders": {"sun": 1.00, "cloudy": 0.90, "rain": 0.40, "snow": 0.10}
     }
 }
 
-
-from engine.InitialState.initialState import variables, create_InitialState
+from engine.InitialState.initialState import variables, create_initial_state
 from engine.environment.calendary import create_date
 from engine.environment.weather import update_weather
 
 def run(context_dict):
-    #Crear el diccionario del estado inicial
-    initialState_Dict, dictList = create_InitialState(context_dict)
+    # Crear el diccionario del estado inicial
+    initial_state_dict, dict_list = create_initial_state(context_dict)
 
-    #Pasar los datos necesarios del initialState_Dict a variables
-    yesterday_date, yesterday_date_dict, final_date = variables(initialState_Dict)
+    # Pasar los datos necesarios del initial_state_dict a variables
+    yesterday_date, yesterday_date_dict, final_date = variables(initial_state_dict)
 
     while yesterday_date < final_date:
 
         ###### 1. CALL ENVIRONMENT
 
         ### 1.1 CALL calendary.py
-        #Pasar la fecha actual al motor calendary.py, y este devuelve los atributos de esa fecha exacta
+        # Pasar la fecha actual al motor calendary.py, y este devuelve los atributos de esa fecha exacta
         actual_date_dict = create_date(yesterday_date_dict)
 
         ### 1.2 CALL clima.py
-        #Pasar el clima de ayer al motor clima.py y este devuelve el clima de hoy
+        # Pasar el clima de ayer al motor clima.py y este devuelve el clima de hoy
         actual_date_dict = update_weather(context_dict, actual_date_dict, yesterday_date_dict)
 
         ###### 2. CALL TRAFFIC
-        #Calcular tanto el tráfico total como el de cada grupo de edad
+        # Calcular tanto el tráfico total como el de cada grupo de edad
 
         ###### 3. CALL CALCULATOR
-        #Calcula los accidentes ocurridos ese día en función de todos los datos ya obtenidos
+        # Calcula los accidentes ocurridos ese día en función de todos los datos ya obtenidos
 
         ###### 4. CALL UPDATE DATAS
-        #Guarda todos los datos obtenidos y creados y actualiza el state
+        # Guarda todos los datos obtenidos y creados y actualiza el state
 
         ###### 5. CALL NEXT
-        #Avanzamos un día para que el bucle no sea infinito y guardamos el clima de hoy en la variable
-        #del clima de ayer
+        # Avanzamos un día para que el bucle no sea infinito y guardamos el clima de hoy en la variable
+        # del clima de ayer
         yesterday_date_dict = actual_date_dict
-        yesterday_date = actual_date_dict["Date"]["Date"]
+        yesterday_date = actual_date_dict["date"]["date"]
 
-    return dictList
-
+    return dict_list

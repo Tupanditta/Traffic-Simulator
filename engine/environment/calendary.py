@@ -3,28 +3,28 @@ from typing import TypedDict
 
 def create_date(yesterday_date_dict):
   actual_date_dict = {
-    "Date": {
-      "Date": None,
-      "Attribute": None,
-      "Season": None
+    "date": {
+      "date": None,
+      "attribute": None,
+      "season": None
     }, 
-    "Weather": None,
-    "Traffic": {
-      "Total": None,
-      "Children": None,
-      "Teenagers": None,
-      "Adults": None,
-      "Olders": None
+    "weather": None,
+    "traffic": {
+      "total": None,
+      "children": None,
+      "teenagers": None,
+      "adults": None,
+      "olders": None
     }, 
   }
-  yesterday_date: datetime.date = yesterday_date_dict["Date"]["Date"] #para que reconozca el tipo de dato
+  yesterday_date: datetime.date = yesterday_date_dict["date"]["date"] # para que reconozca el tipo de dato
 
-  oneDay = datetime.timedelta(days=1)
+  one_day = datetime.timedelta(days=1)
 
-  actual_day = yesterday_date + oneDay
+  actual_day = yesterday_date + one_day
 
-  actual_date_dict["Date"]["Date"] = actual_day
-  actual_date_dict["Date"]["Attribute"] = actual_day.weekday()
-  actual_date_dict["Date"]["Season"] = yesterday_date_dict["Date"]["Season"]
+  actual_date_dict["date"]["date"] = actual_day
+  actual_date_dict["date"]["attribute"] = actual_day.weekday()
+  actual_date_dict["date"]["season"] = yesterday_date_dict["date"]["season"]
   
   return actual_date_dict
