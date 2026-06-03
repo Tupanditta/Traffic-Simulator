@@ -26,7 +26,7 @@ def create_initial_state(context_dict):
       "attribute": datetime.date(2017, 12, 10).weekday(),
       "season": 2
     }, 
-    "final_date": datetime.date(2018, 3, 19), # hay que cambiarlo, me lo he inventado
+    "final_date": datetime.date(2017, 12, 13), # hay que cambiarlo, me lo he inventado
     "weather": "rain", 
     "traffic": {
       "total": None,
@@ -35,5 +35,12 @@ def create_initial_state(context_dict):
       "adults": None,
       "olders": None
     }, 
+    "accidents": {
+      "children": None,
+      "teenagers": None, 
+      "adults": None, 
+      "olders": None,
+      "total": None
+    }
   }
   return initial_state_dict, dict_list
