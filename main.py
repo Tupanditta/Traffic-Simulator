@@ -2,7 +2,7 @@
 """
 
 from context.create_context import create
-
+from engine.body import run
 
 ######### 1. PHASE
 """
@@ -18,5 +18,5 @@ se detenga de forma limpia y segura
 """
 
 context_dict = create()
-print(context_dict)
+run(context_dict)
 
