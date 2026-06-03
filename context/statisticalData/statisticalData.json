@@ -140,25 +140,31 @@
   },
   "_comment_env_multipliers": "Como altera el clima la tasa base de siniestralidad.",
   "environmental_multipliers": {
-    "winter": {
+    "posible_states": [
+      "winter",
+      "spring",
+      "summer",
+      "autumn"
+    ],
+    "1": {
       "sun": 1.000,
       "rain": 1.070,
       "snow": 1.620,
       "cloudy": 1.190
     },
-    "spring": {
+    "2": {
       "sun": 1.000,
       "rain": 1.145,
       "snow": 1.440,
       "cloudy": 1.350
     },
-    "summer": {
+    "3": {
       "sun": 1.000,
       "rain": 1.685,
       "snow": 1.310,
       "cloudy": 2.100
     },
-    "autumn": {
+    "4": {
       "sun": 1.000,
       "rain": 1.240,
       "snow": 1.855,

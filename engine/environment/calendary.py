@@ -16,6 +16,13 @@ def create_date(yesterday_date_dict):
       "adults": None,
       "olders": None
     }, 
+    "accidents": {
+      "children": None,
+      "teenagers": None, 
+      "adults": None, 
+      "olders": None,
+      "total": None
+    }
   }
   yesterday_date: datetime.date = yesterday_date_dict["date"]["date"] # para que reconozca el tipo de dato
 

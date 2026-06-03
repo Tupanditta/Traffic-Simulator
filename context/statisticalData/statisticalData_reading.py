@@ -39,6 +39,20 @@ def read_statistical_data():
         
         statistical_data_dict["transition_matrix"] = clean_matrix
         
+      if "environmental_multipliers" in statistical_data_dict:
+        # Creamos un nuevo diccionario con las claves como int
+        raw_matrix = statistical_data_dict["environmental_multipliers"]
+        
+        # Convertimos solo las claves del nivel 1 (1, 2, 3, 4)
+        clean_matrix = {}
+        for k, v in raw_matrix.items():
+            if k.isdigit(): # Comprobamos si es un número antes de convertir
+                clean_matrix[int(k)] = v
+            else:
+                clean_matrix[k] = v # Mantenemos lo demás tal cual
+        
+        statistical_data_dict["environmental_multipliers"] = clean_matrix
+
       return statistical_data_dict
     
   except FileNotFoundError as error_detail: 
