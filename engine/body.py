@@ -97,6 +97,8 @@ context_dict = {
 from engine.InitialState.initialState import variables, create_initial_state
 from engine.environment.calendary import create_date
 from engine.environment.weather import update_weather
+from engine.traffic.traffic_calculator import calculate_traffic
+import pprint #para imprimir diccionarios en las ejecuciones de prueba
 
 def run(context_dict):
     # Crear el diccionario del estado inicial
@@ -119,6 +121,7 @@ def run(context_dict):
 
         ###### 2. CALL TRAFFIC
         # Calcular tanto el tráfico total como el de cada grupo de edad
+        actual_date_dict = calculate_traffic(actual_date_dict, context_dict)
 
         ###### 3. CALL CALCULATOR
         # Calcula los accidentes ocurridos ese día en función de todos los datos ya obtenidos
@@ -131,5 +134,6 @@ def run(context_dict):
         # del clima de ayer
         yesterday_date_dict = actual_date_dict
         yesterday_date = actual_date_dict["date"]["date"]
+        pprint.pprint(actual_date_dict)
 
     return dict_list
