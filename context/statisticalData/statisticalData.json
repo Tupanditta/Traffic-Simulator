@@ -203,5 +203,59 @@
       "rain": 0.40,
       "snow": 0.10
     }
+  },
+  "initial_weather": {
+    "posible_states": [
+      "sun",
+      "rain",
+      "snow",
+      "cloudy"
+    ],
+    "1": {
+      "sun": 0.20,
+      "rain": 0.30,
+      "snow": 0.20,
+      "cloudy": 0.30
+    },
+    "2": {
+      "sun": 0.40,
+      "rain": 0.30,
+      "snow": 0.05,
+      "cloudy": 0.25
+    },
+    "3": {
+      "sun": 0.75,
+      "rain": 0.05,
+      "snow": 0.00,
+      "cloudy": 0.20
+    },
+    "4": {
+      "sun": 0.30,
+      "rain": 0.40,
+      "snow": 0.05,
+      "cloudy": 0.25
+    }
+  },
+  "seasons_dates": {
+    "1": {
+      "name": "Winter",
+      "start": "2016-12-21",
+      "end": "2017-03-19"
+    },
+    "2": {
+      "name": "Spring",
+      "start": "2017-03-20",
+      "end": "2017-06-20"
+    },
+    "3": {
+      "name": "Summer",
+      "start": "2017-06-21",
+      "end": "2017-09-21"
+    },
+    "4": {
+      "name": "Autumn",
+      "start": "2017-09-22",
+      "end": "2017-12-20"
+    }
   }
 }
