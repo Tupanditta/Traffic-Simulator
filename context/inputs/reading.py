@@ -68,11 +68,13 @@ def ask_risk_factors():
   """
   risk_factors = { 
     "alcohol" : {
+      "children": None,
       "teenagers": None,
       "adults" : None, 
       "olders" : None
     },
     "drugs" : {
+      "children": None,
       "teenagers": None,
       "adults" : None, 
       "olders" : None
