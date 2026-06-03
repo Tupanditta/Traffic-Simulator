@@ -11,6 +11,7 @@ acabar. A este archivo solo le interesa calcular.
 Así se aisla de todo el código, y se sigue la independencia que se ha ido contruyendo a lo largo
 del proyecto
 """
+import random
 
 #Statistical function para engine.traffic.traffic_calculator.calculate_traffic
 def calculate_group_traffic(population, demography_percent, weather_multiplier, traffic_exposure_percentage):
@@ -41,3 +42,23 @@ def calculate_risk_factor_multiplier(alcohol_percent, drugs_percent, alcohol_wei
 def calculate_group_accidents(traffic, base_accident_rate, weather_multiplier, behavioral_multiplier):
   group_accidents = int(traffic) * base_accident_rate * weather_multiplier * behavioral_multiplier
   return int(group_accidents)
+
+
+def initial_weather(context_dict): 
+  # Declaro y doy valor a las variables que voy a necesitar
+  season = context_dict["temporality"]
+
+  # Busco en la matriz, la lista de probabilidades atribuidas a la estación
+  initial_weather_dict = context_dict["initial_weather"][season]
+
+  posible_states = context_dict["initial_weather"]["posible_states"] # Obtengo la lista de los posibles estados
+  probabilities_list = [initial_weather_dict[state] for state in posible_states] # De dicho diccionario solo quiero los valores floats
+
+  first_weather = random.choices(
+    population = posible_states,
+    weights = probabilities_list,
+  )
+
+  first_weather = first_weather[0] # Paso de la lista que me devuelve random.choices a un string
+
+  return first_weather
