@@ -10,6 +10,7 @@ Nombrar las variables iniciales que necesito. Es mejor hacerlo en una función a
 no tiene que entrar en el diccionario
 """
 import datetime
+from engine.statistical_functions import initial_weather
 
 def variables(initial_state_dict):
   yesterday_date_dict = initial_state_dict
@@ -22,12 +23,12 @@ def create_initial_state(context_dict):
   dict_list = [] # los diccionarios de cada día se guardarán en una lista
   initial_state_dict = {
     "date": {
-      "date": datetime.date(2017, 12, 10),
-      "attribute": datetime.date(2017, 12, 10).weekday(),
-      "season": 2
+      "date": None,
+      "attribute": None,
+      "season": None
     }, 
-    "final_date": datetime.date(2017, 12, 13), # hay que cambiarlo, me lo he inventado
-    "weather": "rain", 
+    "final_date": None, 
+    "weather": None, 
     "traffic": {
       "total": None,
       "children": None,
@@ -41,6 +42,20 @@ def create_initial_state(context_dict):
       "adults": None, 
       "olders": None,
       "total": None
-    }
+    }   
   }
+  season = context_dict["temporality"]
+  initial_state_dict["date"]["season"] = season
+
+  first_weather = initial_weather(context_dict)
+  initial_state_dict["weather"] = first_weather
+
+  one_day_less = datetime.timedelta(days=1)
+  first_date = datetime.date.fromisoformat(context_dict["seasons_dates"][season]["start"]) - one_day_less
+  initial_state_dict["date"]["date"] =  first_date
+  initial_state_dict["date"]["attribute"] = first_date.weekday()
+
+  last_date = context_dict["seasons_dates"][season]["end"]
+  initial_state_dict["final_date"] = datetime.date.fromisoformat(last_date)
+
   return initial_state_dict, dict_list
