@@ -1,8 +1,8 @@
 """
 """
 
-import context
-import engine.body
+from context.create_context import create
+
 
 ######### 1. PHASE
 """
@@ -17,5 +17,6 @@ Se han ubicado varios "cortafuegos" en los siguientes módulos para que si algo 
 se detenga de forma limpia y segura
 """
 
-context_dict = context.create()
-dictList = engine.body.run(context_dict)
+context_dict = create()
+print(context_dict)
+

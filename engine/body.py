@@ -26,8 +26,7 @@ context_dict = {
     },
     "demography": {
         "children": 15.0,
-        "teenagers": 10.0,
-        "Teenagers": 0.0,  # OJO: Se mantiene el typo de tu código original
+        "Teenagers": 10.0,
         "adults": 55.0,
         "older": 20.0
     },
@@ -85,6 +84,13 @@ context_dict = {
         "Alcohol": 3.0,
         "Drugs": 7.0,
         "Sober": 1.0
+    },
+    "_comment_weather_traffic": "Multiplicador que reduce o mantiene la poblacion en la calle segun el clima.",
+    "Weather_Traffic_Multipliers": {
+        "Children": {"Sun": 1.00, "Cloudy": 0.95, "Rain": 0.60, "Snow": 0.20},
+        "Teenagers": {"Sun": 1.00, "Cloudy": 0.95, "Rain": 0.75, "Snow": 0.40},
+        "Adults": {"Sun": 1.00, "Cloudy": 0.98, "Rain": 0.90, "Snow": 0.75},
+        "Olders": {"Sun": 1.00, "Cloudy": 0.90, "Rain": 0.40, "Snow": 0.10}
     }
 }
 
@@ -112,13 +118,16 @@ def run(context_dict):
         #Pasar el clima de ayer al motor clima.py y este devuelve el clima de hoy
         actual_date_dict = update_weather(context_dict, actual_date_dict, yesterday_date_dict)
 
-        ###### 2. CALL CALCULATOR
+        ###### 2. CALL TRAFFIC
+        #Calcular tanto el tráfico total como el de cada grupo de edad
+
+        ###### 3. CALL CALCULATOR
         #Calcula los accidentes ocurridos ese día en función de todos los datos ya obtenidos
 
-        ###### 3. CALL UPDATE DATAS
+        ###### 4. CALL UPDATE DATAS
         #Guarda todos los datos obtenidos y creados y actualiza el state
 
-        ###### 4. CALL NEXT
+        ###### 5. CALL NEXT
         #Avanzamos un día para que el bucle no sea infinito y guardamos el clima de hoy en la variable
         #del clima de ayer
         yesterday_date_dict = actual_date_dict
