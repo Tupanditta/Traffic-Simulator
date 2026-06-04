@@ -21,10 +21,10 @@ def pass_temporality_options():
   el diccionario se define en este módulo
   """
   temporality_options_dict = {
-    1: "VERANO",
-    2: "INVIERNO",
-    3: "OTOÑO",
-    4: "PRIMAVERA"
+    1: "INVIERNO",
+    2: "PRIMAVERA",
+    3: "VERANO",
+    4: "OTOÑO"
   }
   return temporality_options_dict
 

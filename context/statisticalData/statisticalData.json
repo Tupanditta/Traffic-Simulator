@@ -138,7 +138,7 @@
       "holiday": 0.35
     }
   },
-  "_comment_env_multipliers": "Como altera el clima la tasa base de siniestralidad.",
+  "_comment_env_multipliers": "Como altera el clima la tasa base de siniestralidad según la estación.",
   "environmental_multipliers": {
     "posible_states": [
       "winter",

@@ -5,7 +5,7 @@ Usa una fórmula, la cual puede ir cambiando con el tiempo dependiendo de si se 
 factores o datos que influyan en algún aspecto del tráfico
 """
 
-from typing import TypedDict
+from engine.statistical_functions import calculate_group_traffic
 
 def calculate_traffic(actual_date_dict, context_dict):
   population = context_dict["population"]
@@ -19,7 +19,13 @@ def calculate_traffic(actual_date_dict, context_dict):
   total_traffic = 0
 
   for group in demography_groups_dict.keys(): #calculo el tráfico por grupo y hago la suma parcial
-    group_traffic = population * (demography_groups_dict[group] / 100) * weather_traffic_multipliers_dict[group][weather] * traffic_exposure_percentages_dict[group][attribute]
+    #parámetros para la función estadística
+    demography_percent = demography_groups_dict[group]
+    weather_multiplier = weather_traffic_multipliers_dict[group][weather]
+    traffic_exposure_percentage = traffic_exposure_percentages_dict[group][attribute]
+
+    group_traffic = calculate_group_traffic(population, demography_percent, weather_multiplier, traffic_exposure_percentage)
+    
     actual_date_dict["traffic"][group] = int(group_traffic)
     total_traffic += int(group_traffic)
 

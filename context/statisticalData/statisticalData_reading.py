@@ -23,35 +23,14 @@ def read_statistical_data():
     with open(file_path, "r") as file:
       statistical_data_dict = json.load(file)
       print("Se han cargado los datos exitosamente")
+        
+      statistical_data_dict["transition_matrix"] = convert("transition_matrix", statistical_data_dict)
+      
+      statistical_data_dict["environmental_multipliers"] = convert("environmental_multipliers", statistical_data_dict)
+      
+      statistical_data_dict["seasons_dates"] = convert("seasons_dates", statistical_data_dict)
 
-      if "transition_matrix" in statistical_data_dict:
-        # Creamos un nuevo diccionario con las claves como int
-        raw_matrix = statistical_data_dict["transition_matrix"]
-        
-        # Convertimos solo las claves del nivel 1 (1, 2, 3, 4)
-        # Nota: Esto no afecta a "posible_states"
-        clean_matrix = {}
-        for k, v in raw_matrix.items():
-            if k.isdigit(): # Comprobamos si es un número antes de convertir
-                clean_matrix[int(k)] = v
-            else:
-                clean_matrix[k] = v # Mantenemos "posible_states" tal cual
-        
-        statistical_data_dict["transition_matrix"] = clean_matrix
-        
-      if "environmental_multipliers" in statistical_data_dict:
-        # Creamos un nuevo diccionario con las claves como int
-        raw_matrix = statistical_data_dict["environmental_multipliers"]
-        
-        # Convertimos solo las claves del nivel 1 (1, 2, 3, 4)
-        clean_matrix = {}
-        for k, v in raw_matrix.items():
-            if k.isdigit(): # Comprobamos si es un número antes de convertir
-                clean_matrix[int(k)] = v
-            else:
-                clean_matrix[k] = v # Mantenemos lo demás tal cual
-        
-        statistical_data_dict["environmental_multipliers"] = clean_matrix
+      statistical_data_dict["initial_weather"] = convert("initial_weather", statistical_data_dict)
 
       return statistical_data_dict
     
@@ -63,3 +42,21 @@ def read_statistical_data():
     print(f"El archivo {file_path} está corrupto o mal formateado")
     print(f"Detalle técnico del error {error_detail}")
     sys.exit(1)
+
+def convert(key, statistical_data_dict):
+  if key in statistical_data_dict:
+    # Creamos un nuevo diccionario con las claves como int
+    raw_matrix = statistical_data_dict[key]
+    
+    # Convertimos solo las claves del nivel 1 (1, 2, 3, 4)
+    # Nota: Esto no afecta a "posible_states"
+    clean_matrix = {}
+    for k, v in raw_matrix.items():
+      if k.isdigit(): # Comprobamos si es un número antes de convertir
+        clean_matrix[int(k)] = v
+      else:
+        clean_matrix[k] = v # Mantenemos "posible_states" tal cual
+    
+    return clean_matrix
+  
+  return statistical_data_dict

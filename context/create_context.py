@@ -13,3 +13,4 @@ def create():
   context_dict = user_inputs_dict | statistical_data_dict
   
   return context_dict
+
