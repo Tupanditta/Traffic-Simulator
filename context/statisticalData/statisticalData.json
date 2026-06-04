@@ -3,10 +3,10 @@
   "_comment_matrix": "Probabilidades de transicion de Markov. Claves: sun, rain, snow, cloudy",
   "transition_matrix": {
     "posible_states": [
-      "sun",
-      "rain",
-      "snow",
-      "cloudy"
+      "winter",
+      "spring",
+      "summer",
+      "autumn"
     ],
     "1": {
       "sun": {
@@ -206,10 +206,10 @@
   },
   "initial_weather": {
     "posible_states": [
-      "sun",
-      "rain",
-      "snow",
-      "cloudy"
+      "winter",
+      "spring",
+      "summer",
+      "autumn"
     ],
     "1": {
       "sun": 0.20,
