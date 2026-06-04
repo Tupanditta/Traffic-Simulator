@@ -3,6 +3,7 @@
 
 from context.create_context import create
 from engine.body import run
+from persistence.sqlite_exporter import export_to_sqlite
 
 ######### 1. PHASE
 """
@@ -18,5 +19,6 @@ se detenga de forma limpia y segura
 """
 
 context_dict = create()
-run(context_dict)
+dict_list = run(context_dict)
+export_to_sqlite(dict_list)
 
