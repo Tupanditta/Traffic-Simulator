@@ -5,7 +5,7 @@ cadena de texto
 
 En este módulo se modifican los datos del context_dict
 """
-from persistence.conversion.do_conversion import do
+from formatters.core_conversion import do
 
 def context_dict_str_conversion(context_dict):
   """

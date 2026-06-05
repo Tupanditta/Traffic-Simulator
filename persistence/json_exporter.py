@@ -1,6 +1,5 @@
 import os
 import json
-from persistence.conversion.context_dict_conversion import context_dict_str_conversion
 def export_to_json(context_dict, output_folder):
     json_file_path = os.path.join(output_folder, "context_dict_export.json")
     print(f"\n[Persistencia] Exportando configuración JSON a: {json_file_path}...")

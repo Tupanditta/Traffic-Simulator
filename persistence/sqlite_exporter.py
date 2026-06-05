@@ -1,7 +1,6 @@
 import pandas as pd
 import sqlite3 
 import os
-from persistence.conversion.dict_list_conversion import dict_list_str_conversion
 
 def export_to_sqlite(dict_list, output_folder):
   #Creo el nombre de la base de datos
