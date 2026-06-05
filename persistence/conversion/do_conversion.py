@@ -6,7 +6,7 @@ def do(sub_dict: dict, str_list: list):
   new_sub_dict = {}
 
   for key, value in sub_dict.items():
-    if key.isdigit():
+    if str(key).isdigit():
       index = int(key) - 1
       if 0 <= index < len(str_list):
         str_value = str_list[index]
