@@ -1,7 +1,6 @@
 import pandas as pd
 import sqlite3 
 from persistence.conversion.dict_list_conversion import dict_list_str_conversion
-from persistence.conversion.context_dict_conversion import context_dict_str_conversion
 
 def export_to_sqlite(dict_list):
   #Tengo que hacer la conversión de int a str
