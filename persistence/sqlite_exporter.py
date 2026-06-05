@@ -1,32 +1,31 @@
 import pandas as pd
 import sqlite3 
+import os
 from persistence.conversion.dict_list_conversion import dict_list_str_conversion
 
-def export_to_sqlite(dict_list):
-  #Tengo que hacer la conversión de int a str
-  dict_list = dict_list_str_conversion(dict_list)
-
+def export_to_sqlite(dict_list, output_folder):
   #Creo el nombre de la base de datos
   db_name = "traffic_accident_simulator(2).db"
+  db_path = os.path.join(output_folder, db_name)
 
-  #Creo los nombres de las tablas
+  #Creo el nombre de la tabla
   dict_list_tb_name = "daily_datas"
 
   #Normalizo los diccionarios
   dict_list_data_frame = normalize_datas(dict_list)
 
-  create_data_base(dict_list_data_frame, db_name, dict_list_tb_name)
+  create_data_base(dict_list_data_frame, db_path, dict_list_tb_name)
 
 def normalize_datas(dict_list):
   df_normalized = pd.json_normalize(dict_list, sep="_")
   return df_normalized
 
-def create_data_base(dict_list_data_frame: dict, db_name, tb_name):
+def create_data_base(dict_list_data_frame: pd.DataFrame, db_path: str, tb_name: str):
   # 1. Crear el nombre del archivo de la base de datos
-  print(f"Abriendo conexión con la base de datos: {db_name}...")
+  print(f"\n[Persistencia] Abriendo conexión con la base de datos: {db_path}...")
 
   # 2. Abrir la conexión (Esto creará el archivo automáticamente en tu carpeta)
-  conexion = sqlite3.connect(db_name)
+  conexion = sqlite3.connect(db_path)
   try:
     # 3. La inyección de datos
     dict_list_data_frame.to_sql(
