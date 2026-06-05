@@ -17,7 +17,7 @@ def read_statistical_data():
 
   # Construimos la ruta dinámica al JSON (busca en la misma carpeta que este script)
   actual_directory = os.path.dirname(__file__)
-  file_path = os.path.join(actual_directory, "statisticalData.json")
+  file_path = os.path.join(actual_directory, "statistical_data.json")
 
   try:
     with open(file_path, "r") as file:

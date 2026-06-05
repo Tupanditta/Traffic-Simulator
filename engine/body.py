@@ -6,7 +6,7 @@ Creará los datos y los almacenará en la estructura de datos ubicada en el arch
 state
 """
 
-from engine.InitialState.initialState import variables, create_initial_state
+from engine.initial_state.initial_state import variables, create_initial_state
 from engine.environment.calendary import create_date
 from engine.environment.weather import update_weather
 from engine.traffic.traffic_calculator import calculate_traffic

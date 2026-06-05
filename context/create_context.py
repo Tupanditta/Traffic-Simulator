@@ -1,5 +1,5 @@
 # Importamos la FUNCIÓN read_statistical_data desde el archivo statisticalData_reading
-from context.statisticalData.statisticalData_reading import read_statistical_data
+from context.statistical_data.statistical_data_reading import read_statistical_data
 
 # Importamos la FUNCIÓN user_datas desde el archivo data_dictionary
 from context.inputs.data_dictionary import user_datas
