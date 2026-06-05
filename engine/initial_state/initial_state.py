@@ -10,7 +10,7 @@ Nombrar las variables iniciales que necesito. Es mejor hacerlo en una función a
 no tiene que entrar en el diccionario
 """
 import datetime
-from engine.statistical_functions import initial_weather
+from .initial_state_statistical_functions import initial_weather
 
 def variables(initial_state_dict):
   yesterday_date_dict = initial_state_dict

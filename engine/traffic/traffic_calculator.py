@@ -5,7 +5,7 @@ Usa una fórmula, la cual puede ir cambiando con el tiempo dependiendo de si se 
 factores o datos que influyan en algún aspecto del tráfico
 """
 
-from engine.statistical_functions import calculate_group_traffic
+from .traffic_statistical_functions import calculate_group_traffic
 
 def calculate_traffic(actual_date_dict, context_dict):
   population = context_dict["population"]
