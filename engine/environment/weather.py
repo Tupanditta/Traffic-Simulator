@@ -20,11 +20,11 @@ def create_weather(context_dict, actual_date_dict, yesterday_date_dict):
   # Busco en la matriz, la lista de probabilidades atribuidas al clima de ayer
   transition_matrix = context_dict["transition_matrix"][season][yesterday_weather] 
 
-  posible_states = context_dict["transition_matrix"]["posible_states"] # Obtengo la lista de los posibles estados
-  probabilities_list = [transition_matrix[state] for state in posible_states] # De dicho diccionario solo quiero los valores floats
+  weather_list = context_dict["transition_matrix"]["weather_list"] # Obtengo la lista de los posibles estados del weather
+  probabilities_list = [transition_matrix[state] for state in weather_list] # De dicho diccionario solo quiero los valores floats
 
   new_weather = random.choices(
-    population = posible_states,
+    population = weather_list,
     weights = probabilities_list,
   )
 

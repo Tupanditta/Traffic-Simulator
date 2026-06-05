@@ -51,11 +51,11 @@ def initial_weather(context_dict):
   # Busco en la matriz, la lista de probabilidades atribuidas a la estación
   initial_weather_dict = context_dict["initial_weather"][season]
 
-  posible_states = context_dict["initial_weather"]["posible_states"] # Obtengo la lista de los posibles estados
-  probabilities_list = [initial_weather_dict[state] for state in posible_states] # De dicho diccionario solo quiero los valores floats
+  weather_list = context_dict["initial_weather"]["weather_list"] # Obtengo la lista de los posibles estados del weather
+  probabilities_list = [initial_weather_dict[state] for state in weather_list] # De dicho diccionario solo quiero los valores floats
 
   first_weather = random.choices(
-    population = posible_states,
+    population = weather_list,
     weights = probabilities_list,
   )
 

@@ -2,11 +2,17 @@
   "_comment_doc": "Archivo de configuracion principal del Simulador de Accidentes.",
   "_comment_matrix": "Probabilidades de transicion de Markov. Claves: sun, rain, snow, cloudy",
   "transition_matrix": {
-    "posible_states": [
+    "seasons_list": [
       "winter",
       "spring",
       "summer",
       "autumn"
+    ],
+    "weather_list": [
+      "sun",
+      "rain",
+      "snow",
+      "cloudy"
     ],
     "1": {
       "sun": {
@@ -140,7 +146,7 @@
   },
   "_comment_env_multipliers": "Como altera el clima la tasa base de siniestralidad según la estación.",
   "environmental_multipliers": {
-    "posible_states": [
+    "seasons_list": [
       "winter",
       "spring",
       "summer",
@@ -205,7 +211,13 @@
     }
   },
   "initial_weather": {
-    "posible_states": [
+    "weather_list": [
+      "sun",
+      "rain",
+      "snow",
+      "cloudy"
+    ],
+    "seasons_list": [
       "winter",
       "spring",
       "summer",

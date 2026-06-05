@@ -55,7 +55,7 @@ def convert(key, statistical_data_dict):
       if k.isdigit(): # Comprobamos si es un número antes de convertir
         clean_matrix[int(k)] = v
       else:
-        clean_matrix[k] = v # Mantenemos "posible_states" tal cual
+        clean_matrix[k] = v # Mantenemos las listas de texto tal cual
     
     return clean_matrix
   
