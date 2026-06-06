@@ -13,9 +13,18 @@ def export_to_sqlite(dict_list: list, output_folder: str):
   """
   Dirigir la exportación a sqlite
   """
-  #Creo el nombre de la base de datos
-  db_name = "traffic_accident_simulator(2).db"
+  #Creo el nombre inicial de la base de datos
+  db_name = "traffic_accident_simulator.db"
   db_path = os.path.join(output_folder, db_name)
+  
+  #Transformo el nombre db_name por si ya exsite algún archivo.db
+  base_name, extension = os.path.splitext(db_name)
+  cont = 1
+
+  while os.path.exists(db_path):
+    new_db_name = f"{base_name}({cont}){extension}" #actualizar nombre
+    db_path = os.path.join(output_folder, new_db_name) #actualizar ruta
+    cont += 1 #actualizar contador
 
   #Creo el nombre de la tabla
   dict_list_tb_name = "daily_datas"
@@ -25,7 +34,7 @@ def export_to_sqlite(dict_list: list, output_folder: str):
 
   create_data_base(dict_list_data_frame, db_path, dict_list_tb_name)
 
-def normalize_datas(dict_list) -> list[dict]:
+def normalize_datas(dict_list) -> pd.DataFrame:
   """
   Normalizar los datos para después exportarlos
   """
