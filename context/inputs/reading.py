@@ -15,7 +15,7 @@ Si alguna entrada no es válida, se vuelve a pedir de nuevo
   en el archivo validator.py 
 """
 
-from .validator import validate_demography, validate_population, validate_risk_factors, validate_temporality, pass_temporality_options
+from .validator import validate_demography, validate_population, validate_risk_factors, validate_temporality, pass_temporality_options, pass_year_options, validate_year
 
 def ask_temporality() -> int:
   """
@@ -149,3 +149,22 @@ def ask_demography() -> dict:
           print("[ERROR] Entrada no válida. Se debe introducir un valor numérico válido\n")
 
   return demography
+
+def ask_year() -> int:
+  """
+  Muestra que años hay disponibles y le pide al usuario que introduzca
+  uno de esos
+  """
+  year_options = pass_year_options()
+
+  for option in year_options:
+    print(f"Opción: {option} \n")
+
+  while True:
+    try:
+      year = int(input("Introduzca uno de los años de las opciones: "))
+      if validate_year(year): return year
+
+    except ValueError:
+      # Esta línea solo se ejecuta si el valor de temporality son letras, símbolos
+      print("[ERROR] Entrada no válida. Se debe introducir un valor numérico entero\n")

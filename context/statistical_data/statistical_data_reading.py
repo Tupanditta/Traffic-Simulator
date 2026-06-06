@@ -16,15 +16,19 @@ import json
 import sys
 import os
 
-def read_statistical_data() -> dict:
+def read_statistical_data(user_inputs_dict: dict) -> dict:
   """
   Función de leer el archivo.json y pasar sus datos a un diccionario
   """
   print("Iniciando la lectura del archivo json con los Datos Estadísticos: ")
 
+  #Escogemos solo el año que nos interesa
+  year = get_year(user_inputs_dict)
+  file_name = f"statistical_data_{year}.json"
+
   # Construimos la ruta dinámica al JSON (busca en la misma carpeta que este script)
   actual_directory = os.path.dirname(__file__) #para saber cual es el directorio actual
-  file_path = os.path.join(actual_directory, "statistical_data.json")
+  file_path = os.path.join(actual_directory, file_name)
 
   try:
     with open(file_path, "r") as file:
@@ -82,3 +86,6 @@ def convert_all_keys(statistical_data_dict: dict) -> dict:
   statistical_data_dict["initial_weather"] = convert_keys("initial_weather", statistical_data_dict)
 
   return statistical_data_dict
+
+def get_year(user_inputs_dict):
+  return user_inputs_dict["year"]

@@ -21,7 +21,7 @@ from context.inputs.data_dictionary import user_datas
 def create() -> dict:
   # Llamamos a las funciones correctamente
   user_inputs_dict = user_datas()
-  statistical_data_dict = read_statistical_data()
+  statistical_data_dict = read_statistical_data(user_inputs_dict)
 
   # Fusionamos los diccionarios
   context_dict = user_inputs_dict | statistical_data_dict

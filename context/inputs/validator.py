@@ -47,3 +47,17 @@ def validate_demography(demography_percent: float, parcial_percents_sum: float) 
   del 100%
   """
   return demography_percent >= 0 and 100 >= parcial_percents_sum + demography_percent
+
+def pass_year_options() -> list:
+  """
+  Determina que años hay disponibles, y los pasa
+  """
+  year_options = [2017]
+  return year_options
+
+def validate_year(year: int) -> bool:
+  """
+  Solo comprueba si el año está en la lista
+  """
+  year_options = pass_year_options()
+  return year in year_options
