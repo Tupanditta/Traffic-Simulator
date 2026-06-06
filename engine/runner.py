@@ -4,16 +4,19 @@ y así en cada iteración se simulará un día.
 
 Creará los datos y los almacenará en la estructura de datos ubicada en el archivo 
 state
+
+Es preciso que este módulo en ningún momento entre dentro de ningún diccionario, eso lo harán las 
+diferentes funciones
 """
 
-from engine.initial_state.initial_state import variables, create_initial_state
+from engine.initial_state.initial_state import variables, create_initial_state, variable_yesterday_date
 from engine.environment.calendary import create_date
 from engine.environment.weather import update_weather
 from engine.traffic.traffic_calculator import calculate_traffic
 from engine.accidents.accidents_calculator import calculate_accidents
 import pprint #para imprimir diccionarios en las ejecuciones de prueba
 
-def run(context_dict):
+def run(context_dict: dict) -> list[dict]:
     # Crear el diccionario del estado inicial
     initial_state_dict, dict_list = create_initial_state(context_dict)
 
@@ -48,7 +51,8 @@ def run(context_dict):
         # Avanzamos un día para que el bucle no sea infinito y guardamos el clima de hoy en la variable
         # del clima de ayer
         yesterday_date_dict = actual_date_dict
-        yesterday_date = actual_date_dict["date"]["date"]
+        yesterday_date = variable_yesterday_date(actual_date_dict)
+
         pprint.pprint(actual_date_dict)
 
     return dict_list

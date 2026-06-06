@@ -14,7 +14,7 @@ Si existieran cambios en alguna función, a menos que se añadiera un nuevo data
 """
 from .reading import ask_demography, ask_temporality, ask_population, ask_risk_factors
 
-def user_datas():
+def user_datas() -> dict:
   #### CREATE DATA DICTIONARY
   all_data_dictionary = {}
 

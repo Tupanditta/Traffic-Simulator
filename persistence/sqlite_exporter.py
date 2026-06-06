@@ -1,8 +1,18 @@
+"""
+Contiene las funciones necesarias para realizar la exportación de los datos
+de las dict_list a la base de datos de sql, el archivo.db
+
+Para ello es necesario crar la base de datos y antes de ello normalizar el diccionario
+"""
+
 import pandas as pd
 import sqlite3 
 import os
 
-def export_to_sqlite(dict_list, output_folder):
+def export_to_sqlite(dict_list: list, output_folder: str):
+  """
+  Dirigir la exportación a sqlite
+  """
   #Creo el nombre de la base de datos
   db_name = "traffic_accident_simulator(2).db"
   db_path = os.path.join(output_folder, db_name)
@@ -15,11 +25,17 @@ def export_to_sqlite(dict_list, output_folder):
 
   create_data_base(dict_list_data_frame, db_path, dict_list_tb_name)
 
-def normalize_datas(dict_list):
+def normalize_datas(dict_list) -> list[dict]:
+  """
+  Normalizar los datos para después exportarlos
+  """
   df_normalized = pd.json_normalize(dict_list, sep="_")
   return df_normalized
 
 def create_data_base(dict_list_data_frame: pd.DataFrame, db_path: str, tb_name: str):
+  """
+  Es la que realiza la exporación
+  """
   # 1. Crear el nombre del archivo de la base de datos
   print(f"\n[Persistencia] Abriendo conexión con la base de datos: {db_path}...")
 

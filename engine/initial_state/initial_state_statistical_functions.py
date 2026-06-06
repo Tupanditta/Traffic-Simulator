@@ -1,6 +1,16 @@
+"""
+Las funciones estadísticas que va a usar el módulo initial_state.py se implementan
+aquí
+
+No está aislado del código por completo, ya que desde aquí se accede a un diccionario
+"""
+
 import random
 
-def initial_weather(context_dict): 
+def initial_weather(context_dict: dict) -> str: 
+  """
+  Calcula y devuelve el weather inicial del día 0
+  """
   # Declaro y doy valor a las variables que voy a necesitar
   season = context_dict["temporality"]
 

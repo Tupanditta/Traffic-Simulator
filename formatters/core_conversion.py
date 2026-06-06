@@ -1,8 +1,13 @@
 """
 Hay que aislar la función que hace la conversión, esta luego se llama desde diferentes módulos 
+
+Cuidado porque este módulo también se mete en diccionarios
 """
 
-def do(sub_dict: dict, str_list: list):
+def do(sub_dict: dict, str_list: list) -> dict:
+  """
+  Realiza la conversión de un subdiccionario del context
+  """
   new_sub_dict = {}
 
   for key, value in sub_dict.items():

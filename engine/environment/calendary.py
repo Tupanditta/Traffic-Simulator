@@ -1,6 +1,14 @@
+"""
+Crea el diccionario para el nuevo día
+
+Da valores a date, attribute y season
+
+Para calcular todos los valores se basa en el día de ayer
+"""
+
 import datetime
 
-def create_date(yesterday_date_dict):
+def create_date(yesterday_date_dict: dict) -> dict:
   actual_date_dict = {
     "date": {
       "date": None,

@@ -4,12 +4,18 @@ aparecen como integers para poder hacer los cálculos pero que su verdadero valo
 cadena de texto
 
 En este módulo se modifican los datos del context_dict
+
+Como tal este también es una manager, ya que llama a una función que es la que hace la 
+verdadera conversión
+
+Este módulo se mete en diccionarios
 """
 from formatters.core_conversion import do
 
-def context_dict_str_conversion(context_dict):
+def context_dict_str_conversion(context_dict: dict) -> dict:
   """
-  Los datos a convertir siempre tienen sus respectivos valores en una lista, ordenada
+  Se convierten algunos datos del context con sus respectivos valores,
+  los valores correspondientes aparecen en una lista que se lee del json
   """
   #calculo los parámetros para las claves necesarias
   posible_states_transition_matrix = context_dict["transition_matrix"]["seasons_list"]

@@ -1,35 +1,43 @@
+"""
+El manager de las funciones de exportación
+
+Calcula y crea la ruta a la que se van a exportar los dos archivos
+
+Luego llama a las funciones de exporación
+"""
+
 import os
 
 from persistence.sqlite_exporter import export_to_sqlite
 from persistence.json_exporter import export_to_json
 
-def get_output_directory():
+def get_output_directory() -> str:
     """
     Calcula dinámicamente la ruta para crear una carpeta 'outputs' 
     fuera de la carpeta de código fuente.
     """
-    # 1. Obtenemos la ruta absoluta de este script
+    #Obtenemos la ruta absoluta de este script
     current_dir = os.path.dirname(os.path.abspath(__file__))
     
-    # 2. Subimos los niveles necesarios (Ajusta los ".." según tus carpetas)
+    #Subimos los niveles necesarios (Ajusta los ".." según tus carpetas)
     root_dir = os.path.abspath(os.path.join(current_dir, "..", ".."))
     
-    # 3. Definimos la carpeta de destino
+    #Definimos la carpeta de destino
     outputs_dir = os.path.join(root_dir, "outputs")
     
-    # 4. Creamos la carpeta (exist_ok=True evita errores si ya estaba creada)
+    #Creamos la carpeta (exist_ok=True evita errores si ya estaba creada)
     os.makedirs(outputs_dir, exist_ok=True)
     
     return outputs_dir
 
-def execute_exports(dict_list, context_dict):
+def execute_exports(dict_list: list, context_dict: dict):
     """
     Función principal a la que llamará el bucle de tu simulador al terminar.
     """   
-    # 1. Obtención de la carpeta de salida
+    #Carpeta de salida
     output_folder = get_output_directory()
-
-    # 2. Ejecución de las exportaciones modulares
+    
+    #Llamar a las funciones
     export_to_json(context_dict, output_folder)
     export_to_sqlite(dict_list, output_folder)
     

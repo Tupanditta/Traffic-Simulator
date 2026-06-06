@@ -1,6 +1,17 @@
+"""
+Para la acción de exportar el contenido del context a un archivo.json
+
+No se mete en el context como tal, por lo que si este está mal este módulo 
+no hay que cambiar nada
+"""
+
 import os
 import json
-def export_to_json(context_dict, output_folder):
+
+def export_to_json(context_dict: dict, output_folder: str):
+    """
+    Realiza la acción de exportar el contenido del context a un archivo.json
+    """
     json_file_path = os.path.join(output_folder, "context_dict_export.json")
     print(f"\n[Persistencia] Exportando configuración JSON a: {json_file_path}...")
     

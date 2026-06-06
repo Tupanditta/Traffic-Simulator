@@ -12,7 +12,10 @@ no tiene que acceder al diccionario en ningún momento
 
 import random
 
-def create_weather(context_dict, actual_date_dict, yesterday_date_dict):
+def create_weather(context_dict: dict, actual_date_dict: dict, yesterday_date_dict: dict) -> str:
+  """
+  Calculo el nuevo weather para el día actual
+  """
   # Declaro y doy valor a las variables que voy a necesitar
   season = actual_date_dict["date"]["season"]
   yesterday_weather = yesterday_date_dict["weather"]
@@ -32,7 +35,11 @@ def create_weather(context_dict, actual_date_dict, yesterday_date_dict):
 
   return new_weather
 
-def update_weather(context_dict, actual_date_dict, yesterday_date_dict):
+def update_weather(context_dict: dict, actual_date_dict: dict, yesterday_date_dict: dict) -> dict:
+  """
+  Llamo a la fución que calcula el nuevo weather y lo introduzco en el diccionario
+  del día actual
+  """
   new_weather = create_weather(context_dict, actual_date_dict, yesterday_date_dict)
   actual_date_dict["weather"] = new_weather
   

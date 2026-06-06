@@ -2,12 +2,18 @@
 Calcula los accidentes totales y de cada grupo y actualiza el diccionario del día
 
 Se basa en unas fórmulas estadísticas del módulo statistical_functions
+
+De quienes calculan los accidentes, solo este módulo se mete dentro de diccionarios
 """
 
 from .accidents_statistical_functions import calculate_risk_factor_multiplier, calculate_group_accidents
 from typing import TypedDict
 
-def calculate_accidents(actual_date_dict, context_dict: dict):
+def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
+  """
+  Calcula y actualiza los datos de los accidentes totales y de cada 
+  grupo de edad
+  """
   # Extraigo los datos generales que aplican a todos los grupos
   weather = actual_date_dict["weather"]
   season = actual_date_dict["date"]["season"]
