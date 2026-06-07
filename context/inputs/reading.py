@@ -84,6 +84,12 @@ def ask_risk_factors() -> dict:
       "teenagers": None,
       "adults" : None, 
       "olders" : None
+    },
+    "distractions_elec_div": {
+      "children": None,
+      "teenagers": None,
+      "adults" : None, 
+      "olders" : None
     }
   }
 

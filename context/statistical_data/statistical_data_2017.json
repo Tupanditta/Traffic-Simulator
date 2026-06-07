@@ -46,8 +46,9 @@
     "3": { "sun": 1.000, "rain": 1.685, "snow": 1.310, "cloudy": 2.100 },
     "4": { "sun": 1.000, "rain": 1.240, "snow": 1.855, "cloudy": 1.520 }
   },
-  "_comment_beh_multipliers": "Como altera el comportamiento (alcohol/drogas) el riesgo individual.",
+  "_comment_beh_multipliers": "Como altera el comportamiento el riesgo individual.",
   "behavioral_multipliers": {
+    "distractions_elec_div": 2.0,
     "alcohol": 3.0,
     "drugs": 7.0,
     "sober": 1.0

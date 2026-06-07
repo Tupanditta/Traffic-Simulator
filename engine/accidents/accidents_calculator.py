@@ -20,6 +20,7 @@ def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
   base_rate = context_dict["base_accident_rate"]
   
   # Extraigo los pesos fijos del comportamiento
+  distractions_elec_div_weight = context_dict["behavioral_multipliers"]["distractions_elec_div"]
   alcohol_weight = context_dict["behavioral_multipliers"]["alcohol"]
   drugs_weight = context_dict["behavioral_multipliers"]["drugs"]
   sober_weight = context_dict["behavioral_multipliers"]["sober"]
@@ -35,12 +36,15 @@ def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
     
     alcohol_dict: dict = context_dict["risk_factors"]["alcohol"]
     drugs_dict: dict = context_dict["risk_factors"]["drugs"]
+    distractions_elec_div_dict: dict = context_dict["risk_factors"]["distractions_elec_div"]
+    
     alcohol_pct = alcohol_dict.get(group, 0.0)
     drugs_pct = drugs_dict.get(group, 0.0)
+    distractions_elec_div_pct = distractions_elec_div_dict.get(group, 0.0)
     
     env_multiplier = context_dict["environmental_multipliers"][season][weather]
 
-    beh_multiplier = calculate_risk_factor_multiplier(alcohol_pct, drugs_pct, alcohol_weight, drugs_weight, sober_weight)
+    beh_multiplier = calculate_risk_factor_multiplier(alcohol_pct, drugs_pct, alcohol_weight, drugs_weight, sober_weight, distractions_elec_div_weight, distractions_elec_div_pct)
     group_accidents = calculate_group_accidents(group_traffic, base_rate, env_multiplier, beh_multiplier)
 
     actual_date_dict["accidents"][group] = group_accidents
