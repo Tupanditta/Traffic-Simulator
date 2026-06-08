@@ -48,10 +48,42 @@
   },
   "_comment_beh_multipliers": "Como altera el comportamiento el riesgo individual.",
   "behavioral_multipliers": {
-    "distractions_elec_div": 2.0,
-    "alcohol": 3.0,
-    "drugs": 7.0,
-    "sober": 1.0
+    "distractions_elec_div": {
+      "group_multiplier": {
+        "children": 1.0,
+        "teenagers": 1.0,
+        "adults": 1.0,
+        "olders": 1.0
+      },
+      "weight": 2.0
+    },
+    "alcohol": {
+      "group_multiplier": {
+        "children": 1.0,
+        "teenagers": 1.0,
+        "adults": 1.0,
+        "olders": 1.0
+      },
+      "weight": 5.0
+    },
+    "drugs": {
+      "group_multiplier": {
+        "children": 1.0,
+        "teenagers": 1.0,
+        "adults": 1.0,
+        "olders": 1.0
+      },
+      "weight": 7.0
+    }, 
+    "sober": {
+      "group_multiplier": {
+        "children": 1.0,
+        "teenagers": 1.0,
+        "adults": 1.0,
+        "olders": 1.0
+      },
+      "weight": 1.0
+    }
   },
   "_comment_weather_traffic": "Multiplicador que reduce o mantiene la poblacion en la calle segun el clima.",
   "weather_traffic_multipliers": {

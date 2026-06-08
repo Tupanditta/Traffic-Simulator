@@ -18,12 +18,9 @@ def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
   weather = actual_date_dict["weather"]
   season = actual_date_dict["date"]["season"]
   base_accident_rate = context_dict["base_accident_rate"]
-  
-  # Extraigo los pesos fijos del comportamiento
-  distractions_elec_div_weight = context_dict["behavioral_multipliers"]["distractions_elec_div"]
-  alcohol_weight = context_dict["behavioral_multipliers"]["alcohol"]
-  drugs_weight = context_dict["behavioral_multipliers"]["drugs"]
-  sober_weight = context_dict["behavioral_multipliers"]["sober"]
+
+  #Necesito el diccionario de sober, que sé que siempre va a existir
+  sober_dict = context_dict["behavioral_multipliers"]["sober"]
 
   total_accidents = 0
 
@@ -34,22 +31,17 @@ def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
   # Bucle por cada grupo de edad
   for group in demography_groups:
     
-    #Factores de riesgo DICCIONARIOS
-    alcohol_dict: dict = context_dict["risk_factors"]["alcohol"]
-    drugs_dict: dict = context_dict["risk_factors"]["drugs"]
-    distractions_elec_div_dict: dict = context_dict["risk_factors"]["distractions_elec_div"]
-
-    #Factores de riesgo PORCENTAJES
-    alcohol_pct = alcohol_dict.get(group, 0.0)
-    drugs_pct = drugs_dict.get(group, 0.0)
-    distractions_elec_div_pct = distractions_elec_div_dict.get(group, 0.0)
-    
     #Otros parámetros 
     weather_multiplier = context_dict["environmental_multipliers"][season][weather]
     group_traffic = actual_date_dict["traffic"][group]
 
+    #Creo la sober list como (weight, group_multiplier)
+    sober_list = (context_dict["behavioral_multipliers"]["sober"]["weight"], context_dict["behavioral_multipliers"]["sober"]["group_multiplier"][group])
+    
+    risk_factors_list = build_risk_factors_list(context_dict, group)
+
     #Calcular los accidentes del grupo de edad
-    group_accidents = calculate_group_accidents(group_traffic, base_accident_rate, weather_multiplier, alcohol_pct, drugs_pct, distractions_elec_div_pct, alcohol_weight, drugs_weight, distractions_elec_div_weight, sober_weight)
+    group_accidents = calculate_group_accidents(group_traffic, base_accident_rate, weather_multiplier, sober_list, risk_factors_list)
 
     #Actualizar variable total_accidents y el diccionario
     actual_date_dict["accidents"][group] = group_accidents
@@ -59,3 +51,14 @@ def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
   
   return actual_date_dict
 
+def build_risk_factors_list(context_dict: dict, group: str):
+  risk_factors_list = []
+
+  for risk_factor_name, risk_factor_dict in context_dict["risk_factors"].items():
+    risk_factor_pct = risk_factor_dict.get(group, 0.0)
+    risk_factor_weight = context_dict["behavioral_multipliers"][risk_factor_name]["weight"]
+    group_multiplier = context_dict["behavioral_multipliers"][risk_factor_name]["group_multiplier"][group]
+
+    risk_factors_list.append((risk_factor_pct, risk_factor_weight, group_multiplier))
+
+  return risk_factors_list

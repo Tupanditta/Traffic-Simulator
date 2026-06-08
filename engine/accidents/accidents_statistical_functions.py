@@ -1,23 +1,25 @@
 """
 Contiene las funciones que calculan los accidentes
 
-Estas funciones solo reciben parámetros numéricos, en ningun momento deben conocer
-listas o diccionarios
+Estas funciones solono se meten en diccionarios, ni en sus claves ni en sus valores
 """
 import numpy as np
-def calculate_risk_factor_multiplier(alcohol_pct: float, drugs_pct: float, alcohol_weight: float, drugs_weight: float, sober_weight: float, distractions_elec_div_weight: float, distractions_elec_div_pct: float):
+def calculate_risk_factor_multiplier(risk_factors_list: list, sober_list: list):
   """
   Devuelve un multiplicador en base a los factores de riesgo
   """
-  alcohol_pct = float(alcohol_pct)
-  drugs_pct = float(drugs_pct)
-  sober_pct = 100 - alcohol_pct - drugs_pct
+  behavioral_multiplier_sum = 0.0
+  total_pct_sum = 0.0
 
-  behavioral_multiplier_sum = (alcohol_pct*alcohol_weight) + (drugs_pct*drugs_weight) + (sober_pct*sober_weight) + (distractions_elec_div_pct*distractions_elec_div_weight)
-  behavioral_multiplier = behavioral_multiplier_sum / 100
+  for pct, weight, group_mult in risk_factors_list:
+    behavioral_multiplier_sum += pct*weight*group_mult
+    total_pct_sum += pct
+  
+  sober_pct = 100 - total_pct_sum
+  behavioral_multiplier_sum += sober_pct*sober_list[0]*sober_list[1]
 
+  behavioral_multiplier = behavioral_multiplier_sum/100
   return behavioral_multiplier
-
 
 def calculate_group_lambda(traffic: int, base_accident_rate: float, weather_multiplier: float, behavioral_multiplier: float) -> float:
   """
@@ -26,12 +28,12 @@ def calculate_group_lambda(traffic: int, base_accident_rate: float, weather_mult
   group_lambda = traffic * base_accident_rate * weather_multiplier * behavioral_multiplier
   return group_lambda
 
-def calculate_group_accidents(traffic: int, base_accident_rate: float, weather_multiplier: float, alcohol_pct: float, drugs_pct: float, distractions_elec_div_pct: float, alcohol_weight: float, drugs_weight: float, distractions_elec_div_weight: float, sober_weight: float):
+def calculate_group_accidents(traffic: int, base_accident_rate: float, weather_multiplier: float, sober_list: list, risk_factors_list: list):
   """
   Calculo lambda y aplico la funció de poisson
   """
 
-  behavioral_multiplier = calculate_risk_factor_multiplier(alcohol_pct, drugs_pct, alcohol_weight, drugs_weight, sober_weight, distractions_elec_div_weight, distractions_elec_div_pct)
+  behavioral_multiplier = calculate_risk_factor_multiplier(risk_factors_list, sober_list)
   lambda_value = calculate_group_lambda(traffic, base_accident_rate, weather_multiplier, behavioral_multiplier)
   
   group_accidents = np.random.poisson(lambda_value)
