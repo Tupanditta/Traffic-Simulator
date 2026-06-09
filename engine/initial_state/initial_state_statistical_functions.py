@@ -12,7 +12,7 @@ def initial_weather(context_dict: dict) -> str:
   Calcula y devuelve el weather inicial del día 0
   """
   # Declaro y doy valor a las variables que voy a necesitar
-  season = context_dict["temporality"]
+  season = context_dict["season"]
 
   # Busco en la matriz, la lista de probabilidades atribuidas a la estación
   initial_weather_dict = context_dict["initial_weather"][season]

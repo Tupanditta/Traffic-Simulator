@@ -8,25 +8,25 @@ punto crítico del módulo reading.
 Por lo que un pequeño cambio en el reading.py puede afectar a este módulo
 """
 
-def validate_temporality(temporality: int) -> bool:
+def validate_season(season: int) -> bool:
   """
   Este solo valida si el valor int está en el intervalo
   """
-  valid_values = pass_temporality_options()
-  return temporality in valid_values
+  valid_values = pass_season_options()
+  return season in valid_values
 
-def pass_temporality_options() -> dict:
+def pass_season_options() -> dict:
   """
-  Defino las opciones que puede tomar el valor conceptual de temporality
+  Defino las opciones que puede tomar el valor conceptual de season
   El diccionario se define en este módulo
   """
-  temporality_options_dict = {
+  season_options_dict = {
     1: "INVIERNO",
     2: "PRIMAVERA",
     3: "VERANO",
     4: "OTOÑO"
   }
-  return temporality_options_dict
+  return season_options_dict
 
 def validate_population(population: int) -> bool:
   """

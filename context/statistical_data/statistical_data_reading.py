@@ -77,6 +77,8 @@ def convert_all_keys(statistical_data_dict: dict) -> dict:
   """
   Convierte todas las claves que están en str y que deberían de estar como integers
   """
+
+  #Primero los que son de primer nivel
   statistical_data_dict["transition_matrix"] = convert_keys("transition_matrix", statistical_data_dict)
       
   statistical_data_dict["environmental_multipliers"] = convert_keys("environmental_multipliers", statistical_data_dict)
@@ -84,6 +86,15 @@ def convert_all_keys(statistical_data_dict: dict) -> dict:
   statistical_data_dict["seasons_dates"] = convert_keys("seasons_dates", statistical_data_dict)
 
   statistical_data_dict["initial_weather"] = convert_keys("initial_weather", statistical_data_dict)
+
+  #Segundo los que son de tercer nivel (necesito determinar el diccionario del nivel superior, no me vale con statistical_data_dict)
+  volume_multipliers_dict = statistical_data_dict["traffic_modifiers"]["volume_multipliers"] #diccionario nivel superior 
+  statistical_data_dict["traffic_modifiers"]["volume_multipliers"]["weather"] = convert_keys("weather", volume_multipliers_dict)
+  statistical_data_dict["traffic_modifiers"]["volume_multipliers"]["day_type"] = convert_keys("day_type", volume_multipliers_dict)
+
+  chaos_modifiers_dict = statistical_data_dict["traffic_modifiers"]["chaos_modifiers"] #diccionario nivel superior
+  statistical_data_dict["traffic_modifiers"]["chaos_modifiers"]["day_type"] = convert_keys("day_type", chaos_modifiers_dict)
+  statistical_data_dict["traffic_modifiers"]["chaos_modifiers"]["weather"] = convert_keys("weather", chaos_modifiers_dict)
 
   return statistical_data_dict
 

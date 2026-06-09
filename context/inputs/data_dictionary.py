@@ -12,7 +12,7 @@ se sabrá que funciones usa internamente la función user_datas()
 
 Si existieran cambios en alguna función, a menos que se añadiera un nuevo data, esta función no cambiaría en absoluto
 """
-from .reading import ask_demography, ask_temporality, ask_population, ask_risk_factors, ask_year
+from .reading import ask_demography, ask_season, ask_population, ask_risk_factors, ask_year
 
 def user_datas() -> dict:
   #### CREATE DATA DICTIONARY
@@ -20,7 +20,7 @@ def user_datas() -> dict:
 
   #### ASK AND VALIDATE ALL DATAS
   all_data_dictionary["year"] = ask_year()
-  all_data_dictionary["temporality"] = ask_temporality()
+  all_data_dictionary["season"] = ask_season()
   all_data_dictionary["population"] = ask_population()
   all_data_dictionary["risk_factors"] = ask_risk_factors() 
   all_data_dictionary["demography"] = ask_demography() 

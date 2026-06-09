@@ -12,7 +12,7 @@ def create_date(yesterday_date_dict: dict) -> dict:
   actual_date_dict = {
     "date": {
       "date": None,
-      "attribute": None,
+      "day_type": None,
       "season": None
     }, 
     "weather": None,
@@ -38,7 +38,7 @@ def create_date(yesterday_date_dict: dict) -> dict:
   actual_day = yesterday_date + one_day
 
   actual_date_dict["date"]["date"] = actual_day
-  actual_date_dict["date"]["attribute"] = actual_day.weekday()
+  actual_date_dict["date"]["day_type"] = actual_day.weekday()
   actual_date_dict["date"]["season"] = yesterday_date_dict["date"]["season"]
   
   return actual_date_dict

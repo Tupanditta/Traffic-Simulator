@@ -39,7 +39,7 @@ def create_initial_state(context_dict: dict) -> tuple[dict, list]:
   initial_state_dict = {
     "date": {
       "date": None,
-      "attribute": None,
+      "day_type": None,
       "season": None
     }, 
     "final_date": None, 
@@ -60,7 +60,7 @@ def create_initial_state(context_dict: dict) -> tuple[dict, list]:
     }   
   } #Los diccionarios de cada día tendrán esta forma
 
-  season = context_dict["temporality"] 
+  season = context_dict["season"] 
   initial_state_dict["date"]["season"] = season
 
   first_weather = initial_weather(context_dict)
@@ -69,7 +69,7 @@ def create_initial_state(context_dict: dict) -> tuple[dict, list]:
   one_day_less = datetime.timedelta(days=1) 
   first_date = datetime.date.fromisoformat(context_dict["seasons_dates"][season]["start"]) - one_day_less
   initial_state_dict["date"]["date"] =  first_date
-  initial_state_dict["date"]["attribute"] = first_date.weekday()
+  initial_state_dict["date"]["day_type"] = first_date.weekday()
 
   last_date = context_dict["seasons_dates"][season]["end"]
   initial_state_dict["final_date"] = datetime.date.fromisoformat(last_date)

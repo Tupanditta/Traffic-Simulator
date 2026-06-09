@@ -15,10 +15,10 @@ def calculate_risk_factor_multiplier(risk_factors_list: list, sober_list: list):
     behavioral_multiplier_sum += pct*weight*group_mult
     total_pct_sum += pct
   
-  sober_pct = 100 - total_pct_sum
+  sober_pct = 1 - total_pct_sum
   behavioral_multiplier_sum += sober_pct*sober_list[0]*sober_list[1]
 
-  behavioral_multiplier = behavioral_multiplier_sum/100
+  behavioral_multiplier = behavioral_multiplier_sum
   return behavioral_multiplier
 
 def calculate_group_lambda(traffic: int, base_accident_rate: float, weather_multiplier: float, behavioral_multiplier: float) -> float:

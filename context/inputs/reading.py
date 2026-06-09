@@ -15,35 +15,35 @@ Si alguna entrada no es válida, se vuelve a pedir de nuevo
   en el archivo validator.py 
 """
 
-from .validator import validate_demography, validate_population, validate_risk_factors, validate_temporality, pass_temporality_options, pass_year_options, validate_year
+from .validator import validate_demography, validate_population, validate_risk_factors, validate_season, pass_season_options, pass_year_options, validate_year
 
-def ask_temporality() -> int:
+def ask_season() -> int:
   """
-  Por ahora el valor temporality serán una de las cuatro estaciones (un valor int en este caso): 
+  Por ahora el valor season serán una de las cuatro estaciones (un valor int en este caso): 
     1 = Verano
     2 = Invierno
     3 = Otoño
     4 = Primavera
 
-  voy a guardarlos en un diccionario; el valor de temporality será la clave del valor (estación)
+  voy a guardarlos en un diccionario; el valor de season será la clave del valor (estación)
   """
-  temporality_options = pass_temporality_options() # devuelve un dict con las opciones
-  print("\t TEMPORALITY") #visual
+  season_options = pass_season_options() # devuelve un dict con las opciones
+  print("\t season") #visual
 
-  for key, value in temporality_options.items(): 
+  for key, value in season_options.items(): 
     print(f"Opción {key}: {value}", end="\n") # Visual
 
   while True:
     try:
       # Hacemos la petición al usuario de la estación del mes
-      temporality = int(input("Introduzca el número de una de las opciones: "))
+      season = int(input("Introduzca el número de una de las opciones: "))
 
       # Verificamos que ha escogido una de las opciones 
-      if validate_temporality(temporality): 
-        return temporality 
+      if validate_season(season): 
+        return season 
       
     except ValueError:
-      # Esta línea solo se ejecuta si el valor de temporality son letras, símbolos
+      # Esta línea solo se ejecuta si el valor de season son letras, símbolos
       print("[ERROR] Entrada no válida. Se debe introducir un valor numérico entero\n")
 
 def ask_population() -> int:
@@ -106,7 +106,7 @@ def ask_risk_factors() -> dict:
 
           # Validar que el dato es correcto
           if validate_risk_factors(risk_factor_percent): 
-            risk_factors[factor][i] = risk_factor_percent
+            risk_factors[factor][i] = risk_factor_percent/100
             break
         except ValueError:
           # Esta línea solo se ejecuta si el valor son letras, símbolos
@@ -143,11 +143,11 @@ def ask_demography() -> dict:
           demography_percent = float(input(f"Introduce qué porcentaje de la población es {i}: "))
           if validate_demography(demography_percent, parcial_percents_sum):  # Valido la entrada
             parcial_percents_sum += demography_percent 
-            demography[i] = demography_percent 
+            demography[i] = demography_percent/100
             cont_percents_saved -= 1 
             break
         else:
-          demography[i] = 100 - parcial_percents_sum # Calculo el último valor
+          demography[i] = (100 - parcial_percents_sum)/100 # Calculo el último valor
           break
 
       except ValueError:
@@ -172,5 +172,5 @@ def ask_year() -> int:
       if validate_year(year): return year
 
     except ValueError:
-      # Esta línea solo se ejecuta si el valor de temporality son letras, símbolos
+      # Esta línea solo se ejecuta si el valor de season son letras, símbolos
       print("[ERROR] Entrada no válida. Se debe introducir un valor numérico entero\n")
