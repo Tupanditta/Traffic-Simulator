@@ -52,7 +52,7 @@ def pass_year_options() -> list:
   """
   Determina que años hay disponibles, y los pasa
   """
-  year_options = [2017]
+  year_options = [2017, 2020]
   return year_options
 
 def validate_year(year: int) -> bool:
