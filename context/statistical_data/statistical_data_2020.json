@@ -1,0 +1,137 @@
+{
+  "_comment_BLOCK_1": "=================== CALENDARIO Y ESTADO INICIAL ===================",
+  "_comment_seasons_dates": "Fechas de inicio y fin de cada estacion para el hemisferio correspondiente en el ano solicitado.",
+  "seasons_dates": {
+    "1": { "name": "Winter", "start": "2020-01-01", "end": "2020-03-19" },
+    "2": { "name": "Spring", "start": "2020-03-20", "end": "2020-06-20" },
+    "3": { "name": "Summer", "start": "2020-06-21", "end": "2020-09-21" },
+    "4": { "name": "Autumn", "start": "2020-09-22", "end": "2020-12-31" }
+  },
+
+  "_comment_initial_weather": "Probabilidad del clima en el Dia 0 por estacion. Cada array debe sumar 1.0.",
+  "initial_weather": {
+    "weather_list": ["sun", "rain", "snow", "cloudy"],
+    "seasons_list": ["winter", "spring", "summer", "autumn"],
+    "1": { "sun": 0.20, "rain": 0.35, "snow": 0.15, "cloudy": 0.30 },
+    "2": { "sun": 0.40, "rain": 0.30, "snow": 0.05, "cloudy": 0.25 },
+    "3": { "sun": 0.65, "rain": 0.15, "snow": 0.00, "cloudy": 0.20 },
+    "4": { "sun": 0.30, "rain": 0.40, "snow": 0.05, "cloudy": 0.25 }
+  },
+
+  "_comment_BLOCK_2": "=================== MOTOR CLIMATICO (MARKOV) ===================",
+  "_comment_matrix": "Probabilidades de transicion. Cadenas de Markov basadas en la climatologia local. Cada subdiccionario (ej. sun) debe sumar 1.0.",
+  "transition_matrix": {
+    "seasons_list": ["winter", "spring", "summer", "autumn"],
+    "weather_list": ["sun", "rain", "snow", "cloudy"],
+    "1": {
+      "sun": { "sun": 0.45, "rain": 0.25, "snow": 0.10, "cloudy": 0.20 },
+      "rain": { "sun": 0.20, "rain": 0.45, "snow": 0.10, "cloudy": 0.25 },
+      "snow": { "sun": 0.15, "rain": 0.30, "snow": 0.35, "cloudy": 0.20 },
+      "cloudy": { "sun": 0.25, "rain": 0.35, "snow": 0.10, "cloudy": 0.30 }
+    },
+    "2": { 
+      "sun": { "sun": 0.55, "rain": 0.20, "snow": 0.00, "cloudy": 0.25 }, 
+      "rain": { "sun": 0.30, "rain": 0.40, "snow": 0.00, "cloudy": 0.30 }, 
+      "snow": { "sun": 0.40, "rain": 0.40, "snow": 0.10, "cloudy": 0.10 }, 
+      "cloudy": { "sun": 0.35, "rain": 0.35, "snow": 0.00, "cloudy": 0.30 } 
+    },
+    "3": { 
+      "sun": { "sun": 0.75, "rain": 0.10, "snow": 0.00, "cloudy": 0.15 }, 
+      "rain": { "sun": 0.45, "rain": 0.25, "snow": 0.00, "cloudy": 0.30 }, 
+      "snow": { "sun": 1.00, "rain": 0.00, "snow": 0.00, "cloudy": 0.00 }, 
+      "cloudy": { "sun": 0.50, "rain": 0.20, "snow": 0.00, "cloudy": 0.30 } 
+    },
+    "4": { 
+      "sun": { "sun": 0.40, "rain": 0.30, "snow": 0.00, "cloudy": 0.30 }, 
+      "rain": { "sun": 0.25, "rain": 0.45, "snow": 0.05, "cloudy": 0.25 }, 
+      "snow": { "sun": 0.20, "rain": 0.35, "snow": 0.20, "cloudy": 0.25 }, 
+      "cloudy": { "sun": 0.30, "rain": 0.40, "snow": 0.05, "cloudy": 0.25 } 
+    }
+  },
+
+  "_comment_BLOCK_3": "=================== MOTOR DE TRAFICO (BASE) ===================",
+  "_comment_groups_base_exposure_rate": "Medias base (Volumen): Porcentaje base de poblacion fisica expuesta (0.1 a 0.95).",
+  "groups_base_exposure_rate": {
+    "children": 0.15,
+    "teenagers": 0.20,
+    "adults": 0.55,
+    "olders": 0.10
+  },
+
+  "_comment_groups_base_volatility_rate": "Desviacion Estandar base (Caos): Fluctuacion minima irreductible. Muy pequenos (0.001 a 0.05).",
+  "groups_base_volatility_rate": {
+    "children": 0.02,
+    "teenagers": 0.03,
+    "adults": 0.05,
+    "olders": 0.01
+  },
+
+  "_comment_BLOCK_4": "=================== MOTOR DE TRAFICO (MODIFICADORES) ===================",
+  "_comment_traffic_modifiers": "Multiplicadores de media (alrededor de 1.0) y sumadores de desviacion (alrededor de 0.05). Adaptar a la cultura local.",
+  "traffic_modifiers": {
+    "seasons_list": ["winter", "spring", "summer", "autumn"],
+    "weather_list": ["sun", "rain", "snow", "cloudy"],
+    "volume_multipliers": {
+      "weather": {
+        "1": { "sun": 1.05, "rain": 0.85, "snow": 0.60, "cloudy": 0.95 },
+        "2": { "sun": 1.00, "rain": 0.80, "snow": 0.55, "cloudy": 0.95 },
+        "3": { "sun": 1.05, "rain": 0.85, "snow": 0.70, "cloudy": 0.95 },
+        "4": { "sun": 1.00, "rain": 0.85, "snow": 0.65, "cloudy": 0.95 }
+      },
+      "day_type": {
+        "1": { "workday": 1.10, "weekend": 0.85, "holiday": 0.70 },
+        "2": { "workday": 0.75, "weekend": 0.25, "holiday": 0.20 },
+        "3": { "workday": 0.95, "weekend": 0.75, "holiday": 0.80 },
+        "4": { "workday": 0.90, "weekend": 0.60, "holiday": 0.50 } 
+      }
+    },
+    "chaos_modifiers": {
+      "weather": {
+        "1": { "sun": 0.01, "rain": 0.04, "snow": 0.12, "cloudy": 0.02 },
+        "2": { "sun": 0.02, "rain": 0.05, "snow": 0.15, "cloudy": 0.02 },
+        "3": { "sun": 0.01, "rain": 0.08, "snow": 0.10, "cloudy": 0.02 },
+        "4": { "sun": 0.01, "rain": 0.05, "snow": 0.12, "cloudy": 0.02 }
+      },
+      "day_type": {
+        "1": { "workday": 0.02, "weekend": 0.06, "holiday": 0.08 },
+        "2": { "workday": 0.04, "weekend": 0.10, "holiday": 0.12 },
+        "3": { "workday": 0.03, "weekend": 0.08, "holiday": 0.09 },
+        "4": { "workday": 0.03, "weekend": 0.09, "holiday": 0.10 } 
+      }
+    }
+  },
+
+  "_comment_BLOCK_5": "=================== MOTOR DE ACCIDENTES (BASE) ===================",
+  "_comment_base_rate": "Probabilidad pura de accidente por persona expuesta. Adaptar a la infraestructura (ej. 0.00015).",
+  "base_accident_rate": 0.00012,
+
+  "_comment_BLOCK_6": "=================== MOTOR DE ACCIDENTES (MODIFICADORES) ===================",
+  "_comment_env_multipliers": "Como altera el clima el RIESGO de accidente por estacion (>1.0 aumenta riesgo).",
+  "environmental_multipliers": {
+    "seasons_list": ["winter", "spring", "summer", "autumn"],
+    "1": { "sun": 1.00, "rain": 1.35, "snow": 2.40, "cloudy": 1.10 },
+    "2": { "sun": 1.00, "rain": 1.30, "snow": 2.00, "cloudy": 1.05 },
+    "3": { "sun": 1.00, "rain": 1.50, "snow": 3.00, "cloudy": 1.05 },
+    "4": { "sun": 1.00, "rain": 1.40, "snow": 2.20, "cloudy": 1.10 }
+  },
+
+  "_comment_beh_multipliers": "Gravedad y afinidad de grupo para factores de riesgo. Weight de sober es siempre 1.0.",
+  "behavioral_multipliers": {
+    "distractions_elec_div": {
+      "group_multiplier": { "children": 0.10, "teenagers": 2.50, "adults": 1.60, "olders": 0.40 },
+      "weight": 1.80
+    },
+    "alcohol": {
+      "group_multiplier": { "children": 0.00, "teenagers": 1.10, "adults": 2.10, "olders": 0.70 },
+      "weight": 2.60
+    },
+    "drugs": {
+      "group_multiplier": { "children": 0.00, "teenagers": 1.90, "adults": 1.50, "olders": 0.20 },
+      "weight": 2.90
+    }, 
+    "sober": {
+      "group_multiplier": { "children": 1.00, "teenagers": 1.00, "adults": 1.00, "olders": 1.00 },
+      "weight": 1.00
+    }
+  }
+}
