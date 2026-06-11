@@ -37,8 +37,9 @@ def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
 
     #Creo la sober list como (weight, group_multiplier)
     sober_list = (sober_dict["weight"], sober_dict["group_multiplier"][group])
+      #NOTA: no necesito el porcentage pues ese se calcula luego en las funciones estadísticas
     
-    risk_factors_list = build_risk_factors_list(context_dict, group)
+    risk_factors_list = build_risk_factors_list(context_dict, group) #Creo la lista específica para cada grupo de edad
 
     #Calcular los accidentes del grupo de edad
     group_accidents = calculate_group_accidents(group_traffic, base_accident_rate, weather_multiplier, sober_list, risk_factors_list)
@@ -52,14 +53,19 @@ def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
   return actual_date_dict
 
 def build_risk_factors_list(context_dict: dict, group: str):
+  """
+  Se crea la lista de parámetros que se le pasará a la calculadora de accidentes
+  Consiste en grupos de 3 datos, el pct del facor de riesgo, el peso que tiene probabilísticamente
+  y un multiplicador por el grupo de edad
+  """
   risk_factors_list = []
-  effective_risk_pct_dict = context_dict["effective_risk_percentage"]
+  effective_risk_pct_dict = context_dict["effective_risk_percentage"] #Para ahorrar líneas de código
 
   for risk_factor_name, risk_factor_dict in context_dict["risk_factors"].items():
     risk_factor_pct = calculate_effective_risk_pct(risk_factor_dict.get(group, 0.0), effective_risk_pct_dict[risk_factor_name][group])
     risk_factor_weight = context_dict["behavioral_multipliers"][risk_factor_name]["weight"]
     group_multiplier = context_dict["behavioral_multipliers"][risk_factor_name]["group_multiplier"][group]
 
-    risk_factors_list.append((risk_factor_pct, risk_factor_weight, group_multiplier))
+    risk_factors_list.append((risk_factor_pct, risk_factor_weight, group_multiplier)) #Se añaden grupos de 3 elementos para cada factor de riesgo
 
   return risk_factors_list

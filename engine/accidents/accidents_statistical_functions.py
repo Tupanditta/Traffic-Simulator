@@ -41,4 +41,9 @@ def calculate_group_accidents(traffic: int, base_accident_rate: float, weather_m
   return group_accidents
 
 def calculate_effective_risk_pct(actual_pct, relative_pct):
+  """
+  Al inicio, el usuario introduce que porcentaje del grupo de edad consume cada factor de riesgo
+  No obstante, de todo ese porcentaje no todos consumen dicho factor a la hora de conducir
+  Esta fórmula calcula el porcentaje absoluto, basandose en un porcentaje relativo del json
+  """
   return actual_pct * relative_pct
