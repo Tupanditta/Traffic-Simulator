@@ -12,7 +12,7 @@ def export_to_json(context_dict: dict, output_folder: str):
     """
     Realiza la acción de exportar el contenido del context a un archivo.json
     """
-    json_file_path = os.path.join(output_folder, "context_dict_export(version 2.1.0).json")
+    json_file_path = os.path.join(output_folder, "context_dict_export(version 2.2.0).json")
     print(f"\n[Persistencia] Exportando configuración JSON a: {json_file_path}...")
     
     try:

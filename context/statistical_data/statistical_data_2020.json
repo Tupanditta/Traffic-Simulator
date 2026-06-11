@@ -103,7 +103,7 @@
 
   "_comment_BLOCK_5": "=================== MOTOR DE ACCIDENTES (BASE) ===================",
   "_comment_base_rate": "Probabilidad pura de accidente por persona expuesta. Adaptar a la infraestructura (ej. 0.00015).",
-  "base_accident_rate": 0.00012,
+  "base_accident_rate": 0.00002,
 
   "_comment_BLOCK_6": "=================== MOTOR DE ACCIDENTES (MODIFICADORES) ===================",
   "_comment_env_multipliers": "Como altera el clima el RIESGO de accidente por estacion (>1.0 aumenta riesgo).",

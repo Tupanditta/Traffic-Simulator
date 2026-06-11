@@ -19,9 +19,6 @@ def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
   season = actual_date_dict["date"]["season"]
   base_accident_rate = context_dict["base_accident_rate"]
 
-  #Necesito el diccionario de sober, que sé que siempre va a existir
-  sober_dict = context_dict["behavioral_multipliers"]["sober"]
-
   total_accidents = 0
 
   #Variables y diccionarios necesarios para el bucle
@@ -34,15 +31,11 @@ def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
     #Otros parámetros 
     weather_multiplier = context_dict["environmental_multipliers"][season][weather]
     group_traffic = actual_date_dict["traffic"][group]
-
-    #Creo la sober list como (weight, group_multiplier)
-    sober_list = (sober_dict["weight"], sober_dict["group_multiplier"][group])
-      #NOTA: no necesito el porcentage pues ese se calcula luego en las funciones estadísticas
     
     risk_factors_list = build_risk_factors_list(context_dict, group) #Creo la lista específica para cada grupo de edad
 
     #Calcular los accidentes del grupo de edad
-    group_accidents = calculate_group_accidents(group_traffic, base_accident_rate, weather_multiplier, sober_list, risk_factors_list)
+    group_accidents = calculate_group_accidents(group_traffic, base_accident_rate, weather_multiplier, risk_factors_list)
 
     #Actualizar variable total_accidents y el diccionario
     actual_date_dict["accidents"][group] = group_accidents
