@@ -14,7 +14,7 @@ def export_to_sqlite(dict_list: list, output_folder: str):
   Dirigir la exportación a sqlite
   """
   #Creo el nombre inicial de la base de datos
-  db_name = "traffic_accident_simulator.db"
+  db_name = "traffic_accident_simulator(version 2.1.0).db"
   db_path = os.path.join(output_folder, db_name)
   
   #Transformo el nombre db_name por si ya exsite algún archivo.db

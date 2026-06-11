@@ -103,7 +103,7 @@
 
   "_comment_BLOCK_5": "=================== MOTOR DE ACCIDENTES (BASE) ===================",
   "_comment_base_rate": "Probabilidad pura de accidente por persona expuesta en condiciones ideales.",
-  "base_accident_rate": 0.00015,
+  "base_accident_rate": 0.00002,
 
   "_comment_BLOCK_6": "=================== MOTOR DE ACCIDENTES (MODIFICADORES) ===================",
   "_comment_env_multipliers": "Como altera el clima la tasa base de siniestralidad de forma general.",
@@ -132,6 +132,26 @@
     "sober": {
       "group_multiplier": { "children": 1.0, "teenagers": 1.0, "adults": 1.0, "olders": 1.0 },
       "weight": 1.0
+    }
+  },
+  "effective_risk_percentage": {
+    "alcohol":{
+      "children": 0.0,
+      "teenagers": 0.0,
+      "adults": 0.0,
+      "olders": 0.0
+    },
+    "drugs": {
+      "children": 0.0,
+      "teenagers": 0.0,
+      "adults": 0.0,
+      "olders": 0.0
+    },
+    "distractions_elec_div": {
+      "children": 0.0,
+      "teenagers": 0.0,
+      "adults": 0.0,
+      "olders": 0.0
     }
   }
 }

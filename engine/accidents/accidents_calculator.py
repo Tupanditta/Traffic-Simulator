@@ -6,7 +6,7 @@ Se basa en unas fórmulas estadísticas del módulo statistical_functions
 De quienes calculan los accidentes, solo este módulo se mete dentro de diccionarios, ninguno más
 """
 
-from .accidents_statistical_functions import calculate_group_accidents
+from .accidents_statistical_functions import calculate_group_accidents, calculate_effective_risk_pct
 from typing import TypedDict
 
 def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
@@ -36,7 +36,7 @@ def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
     group_traffic = actual_date_dict["traffic"][group]
 
     #Creo la sober list como (weight, group_multiplier)
-    sober_list = (context_dict["behavioral_multipliers"]["sober"]["weight"], context_dict["behavioral_multipliers"]["sober"]["group_multiplier"][group])
+    sober_list = (sober_dict["weight"], sober_dict["group_multiplier"][group])
     
     risk_factors_list = build_risk_factors_list(context_dict, group)
 
@@ -53,9 +53,10 @@ def calculate_accidents(actual_date_dict: dict, context_dict: dict) -> dict:
 
 def build_risk_factors_list(context_dict: dict, group: str):
   risk_factors_list = []
+  effective_risk_pct_dict = context_dict["effective_risk_percentage"]
 
   for risk_factor_name, risk_factor_dict in context_dict["risk_factors"].items():
-    risk_factor_pct = risk_factor_dict.get(group, 0.0)
+    risk_factor_pct = calculate_effective_risk_pct(risk_factor_dict.get(group, 0.0), effective_risk_pct_dict[risk_factor_name][group])
     risk_factor_weight = context_dict["behavioral_multipliers"][risk_factor_name]["weight"]
     group_multiplier = context_dict["behavioral_multipliers"][risk_factor_name]["group_multiplier"][group]
 

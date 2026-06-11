@@ -39,3 +39,6 @@ def calculate_group_accidents(traffic: int, base_accident_rate: float, weather_m
   group_accidents = np.random.poisson(lambda_value)
   
   return group_accidents
+
+def calculate_effective_risk_pct(actual_pct, relative_pct):
+  return actual_pct * relative_pct

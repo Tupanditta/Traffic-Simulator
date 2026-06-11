@@ -133,5 +133,25 @@
       "group_multiplier": { "children": 1.00, "teenagers": 1.00, "adults": 1.00, "olders": 1.00 },
       "weight": 1.00
     }
+  },
+  "effective_risk_percentage": {
+    "alcohol":{
+      "children": 0.001,
+      "teenagers": 0.1,
+      "adults": 0.05,
+      "olders": 0.02
+    },
+    "drugs": {
+      "children": 0.0001,
+      "teenagers": 0.08,
+      "adults": 0.04,
+      "olders": 0.0005
+    },
+    "distractions_elec_div": {
+      "children": 0.002,
+      "teenagers": 0.15,
+      "adults": 0.1,
+      "olders": 0.05
+    }
   }
 }
